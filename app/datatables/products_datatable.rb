@@ -27,12 +27,13 @@ private
         "products__id" => product.id,
         "products__name" => product.name,
         "products__price" => product.price,
-        "products__type" => product.type
+        "products__type" => product.type,
+        products_actions: actions(product),
       }
     end
   end
 
-  def actions(instance)
+  def actions(product)
     render(:partial=>"products/actions.html.erb", locals: { product: product} , :formats => [:html]) if params[:table_view_mode] == 'table'
   end
 
