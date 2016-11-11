@@ -1,0 +1,31 @@
+<% content_for :breadcrumbs do %>
+  <ul class="breadcrumb">
+    <li><%= link_to('Home', root_path, :remote => true) %></li>
+    <li class="active">Products</li>
+  </ul>
+<% end %>
+
+<div class="row">
+  <div class="col-lg-12">
+    <div class="green-header">
+      <h2>Products</h2>
+    </div>
+    <div class='tab-pane active'>
+      <% table_filters = capture do %>
+      <% end %>
+      <% table_actions = capture do %>
+      <% end %>
+      <% columns  =[
+        { "title": "Id", "data": "products__id",'visible': true },
+        { "title": "Name", "data": "products__name",'visible': true },
+        { "title": "Type", "data": "products__type",'visible': true },
+        { "title": "Price", "data": "products__price",'visible': true },
+        { "title": "Actions", "data": "products_actions", "class": "center", "bSortable": false,  "width": "250px" }
+      ] %>
+      <%= render(:partial=>"shared/table.html.erb", locals: {:table_name => "products", :aoData => [], :columns => columns, :sort => [[ 0, "asc" ]], :table_filters => table_filters, :table_views => {:table => true, :grid =>false}, :initial_size => 25, :table_actions => table_actions, :table_url =>  products_path(format: "json") }.merge(request.query_parameters), :formats => [:html])  %>
+    </div>
+  </div>
+</div>
+
+<% content_for :scripts do %>
+<% end %>

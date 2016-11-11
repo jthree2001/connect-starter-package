@@ -1,0 +1,22 @@
+<%= yield %>
+<% Array(error).each do |er| %>
+  noty({text: "<%= error %>", layout: "topRight",type: "error", animateOpen: {opacity: "show"}, closeWith: ["hover"]});
+<% end %>
+<% Array(alert).each do |al| %>
+  noty({text: "<%= alert %>", layout: "topRight",type: "warning", animateOpen: {opacity: "show"}, closeWith: ["hover"]});
+<% end %>
+<% Array(notice).each do |no| %>
+  noty({text: "<%= notice %>", layout: "topRight",type: "success", animateOpen: {opacity: "show"}, closeWith: ["hover"]});
+<% end %>
+<% flash.discard(:notice); flash.discard(:error); flash.discard(:alert) %>
+
+<% if content_for?(:breadcrumbs) %>
+  $('#breadcrumbs').html("<%= escape_javascript yield :breadcrumbs %>");
+<% end %>
+$('#content').find('.dropdown-toggle[data-toggle="hold"]').dropdownHold();
+$('body').find(".nav.tab-header a:not('.skip'), #content .nav.nav-tabs a:not('.skip'), .modal-content .nav.tab-header a:not('.skip')").click(function (e) {e.preventDefault(); $(this).tab('show')});
+$('#z_hub_modal input[type="submit"]').click(function(e){
+  $(this).button('loading');
+  $(this).parents('form').addClass('loading');
+});
+<%= content_for :scripts %>
