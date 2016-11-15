@@ -1,31 +1,37 @@
 <% content_for :breadcrumbs do %>
   <ul class="breadcrumb">
-    <li><%= link_to('Home', root_path, :remote => true) %></li>
-    <li class="active">Products</li>
+    <li class="active">Home</li>
   </ul>
 <% end %>
 
 <div class="row">
   <div class="col-lg-12">
     <div class="green-header">
-      <h2>Products</h2>
+      <h2>Connect Starter Package</h2>
     </div>
-    <div class='tab-pane active'>
-      <% table_filters = capture do %>
-      <% end %>
-      <% table_actions = capture do %>
-      <% end %>
-      <% columns  =[
-        { "title": "Id", "data": "products__id",'visible': true },
-        { "title": "Name", "data": "products__name",'visible': true },
-        { "title": "Type", "data": "products__type",'visible': true },
-        { "title": "Price", "data": "products__price",'visible': true },
-        { "title": "Actions", "data": "products_actions", "class": "center", "bSortable": false,  "width": "250px" }
-      ] %>
-      <%= render(:partial=>"shared/table.html.erb", locals: {:table_name => "products", :aoData => [], :columns => columns, :sort => [[ 0, "asc" ]], :table_filters => table_filters, :table_views => {:table => true, :grid =>false}, :initial_size => 25, :table_actions => table_actions, :table_url =>  products_path(format: "json") }.merge(request.query_parameters), :formats => [:html])  %>
+    <ul class="nav tab-header">
+      <li class="active"><a href="#rest">REST Call</a></li>
+      <li class=""><a href="#soap">SOAP Call</a></li>
+      <li class=""><a href="#table">Data Table</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="rest">
+        <%= render 'rest' %>
+      </div>
+      <div class="tab-pane" id="soap">
+        <%= render 'soap' %>
+      </div>
+      <div class="tab-pane" id="table">
+        <%= render 'products' %>
+      </div>
+      <div class="tab-pane" id="jobs">
+      </div>
     </div>
   </div>
 </div>
 
+
 <% content_for :scripts do %>
+  $(products).dataTable().fnSettings().aoServerParams.push({"sName": "user", "fn": function (aoData) { aoData.push({ "name": "product_name", "value": $('#product_name').val() })}});
+  $('#product_name').select2({width: "100%", theme: "bootstrap", containerCssClass: "form-control input-sm", width: "300px"}).on("change", function (e){$(products).dataTable().api().draw(false)});
 <% end %>

@@ -1,0 +1,3 @@
+$('#z_hub_modal').html('<%= escape_javascript render(:file=>"products/new", :formats => [:html]) %>');
+$('#z_hub_modal').modal("show");
+<%= content_for :scripts %>

@@ -31,6 +31,9 @@
 //************ SummerNote ************
 //= require js/summernote.js
 //
+//************ Highlight ************
+//= require js/highlight.pack.js
+//
 //= require js/JSONEditor.js
 //= require js-cookie.js
 //

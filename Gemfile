@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby "2.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '5.0.0'
 gem 'pg'
 
 gem 'nokogiri'
@@ -19,6 +19,11 @@ gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'zuora_api', '~> 0.2.6.2'
 gem 'zuora_connect', '~> 0.0.9.3.0'
 
+gem "delayed_job"
+gem "delayed_job_active_record"
+gem "daemons"
+gem "delayed_job_web"
+gem 'sinatra', '2.0.0.beta2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

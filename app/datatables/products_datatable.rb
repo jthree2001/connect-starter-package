@@ -5,6 +5,7 @@ class ProductsDatatable
     @view = view
     @total_products = Product.count(:all)
     @products = Product.select(select_string).where(search_string, search: "%#{params[:sSearch].to_s.downcase}%").order("#{sort_column} #{sort_direction}")
+    @products = @products.where(:id => params["product_name"]) if params["product_name"]
     @filtered_total = @products.size
     @products = @products.page(page).per_page(per_page)
   end
@@ -27,7 +28,7 @@ private
         "products__id" => product.id,
         "products__name" => product.name,
         "products__price" => product.price,
-        "products__type" => product.type,
+        "products__category" => product.category,
         products_actions: actions(product),
       }
     end
@@ -72,7 +73,7 @@ private
   def search_string
     "to_char(products.id, '999999999') LIKE :search OR
     lower(products.name) LIKE :search OR
-    lower(products.type) LIKE :search OR
+    lower(products.category) LIKE :search OR
     products.price LIKE :search"
   end
 

@@ -1,0 +1,22 @@
+<% table_filters = capture do %>
+  <div class='btn-group'>
+    <div class="btn-group select2-bootstrap-prepend">
+      <%= select_tag(:product_name, options_from_collection_for_select(Product.all.order(name: :asc), 'id', 'name', nil), options = { :class => 'form-control input-sm', :prompt => 'Type', :data =>{:placeholder => "Select Product", "allow-clear" => true }, :style =>''}) %>
+    </div>
+  </div>
+<% end %>
+<% table_actions = capture do %>
+  <div class="btn-group">
+    <%= link_to new_product_path, :remote => true, :class => 'btn btn-default' do %>
+      <span class="fa fa-plus"></span> New Product
+    <% end %>
+  </div>
+<% end %>
+<% columns  =[
+  { "title": "Id", "data": "products__id",'visible': true },
+  { "title": "Name", "data": "products__name",'visible': true },
+  { "title": "Type", "data": "products__category",'visible': true },
+  { "title": "Price", "data": "products__price",'visible': true },
+  { "title": "Actions", "data": "products_actions", "class": "center", "bSortable": false,  "width": "250px" }
+] %>
+<%= render(:partial=>"shared/table.html.erb", locals: {:table_name => "products", :aoData => [], :columns => columns, :sort => [[ 0, "asc" ]], :table_filters => table_filters, :table_views => {:table => true, :grid =>false}, :initial_size => 25, :table_actions => table_actions, :table_url =>  products_path(format: "json") }.merge(request.query_parameters), :formats => [:html])  %>

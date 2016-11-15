@@ -70,10 +70,7 @@ private
   end
 
   def search_string
-    "to_char(zuora_connect_app_instances.id, '999999999') LIKE :search OR
-    (zuora_connect_app_instances.emails)::jsonb ? :search OR
-    lower(zuora_connect_app_instances.notes) LIKE :search OR
-    (zuora_connect_app_instances.limits)::jsonb ?  :search"
+    "to_char(zuora_connect_app_instances.id, '999999999') LIKE :search"
   end
 
   def select_string
