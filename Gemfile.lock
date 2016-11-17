@@ -1,11 +1,3 @@
-PATH
-  remote: /Users/mingle/Development/gems/zuora
-  specs:
-    zuora_api (0.2.6.7)
-      httparty
-      nokogiri (~> 1.6.8)
-      railties (>= 4.1.0, < 5.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -251,6 +243,10 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.1.5)
+    zuora_api (0.2.6.5)
+      httparty
+      nokogiri (~> 1.6.8)
+      railties (>= 4.1.0, < 5.1)
     zuora_connect (0.0.9.3.0)
       apartment (~> 1.2.0)
       bundler (~> 1.12)
@@ -298,7 +294,7 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   will_paginate (~> 3.1.0)
-  zuora_api!
+  zuora_api (~> 0.2.6.2)
   zuora_connect (~> 0.0.9.3.0)
 
 RUBY VERSION
