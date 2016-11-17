@@ -1,1 +1,168 @@
-SOAP
+<h3>Get Data Source Export</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Request</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+client = @appinstance.target_login.client
+client.new_session
+file = c.getDataSourceExport("select id from product")
+File.open(ar[0]).each_line do |line|
+  puts line
+end
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Output</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+<% c = @appinstance.target_login.client %>
+<% c.new_session %>
+<% ar = c.getDataSourceExport("select id from product") %>
+<%= ar %>
+
+# File contents #
+<% File.open(ar[0]).each_line do |line| %>
+  <%= line %>
+<% end %>
+# End #
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Query Products</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Request</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+client = @appinstance.target_login.client
+output_xml, input_xml = client.soap_call() do |xml, args|
+   xml['ns1'].query do
+    xml['ns1'].queryString "select id, name from product"
+   end
+end
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Response</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+      <% client = @appinstance.target_login.client %>
+      <% output_xml, input_xml = client.soap_call() do |xml, args| %>
+        <% xml['ns1'].query do %>
+          <% xml['ns1'].queryString "select id from product" %>
+        <% end %>
+      <% end %>
+<%= output_xml %>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h3>Create Account</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Request</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+client = @appinstance.target_login.client
+output_xml, input_xml = client.soap_call() do |xml, args|
+   xml['ns1'].create do
+    xml['ns1'].zObjects('xsi:type' => "ns2:Account") do
+      xml['ns2'].name "Test Account"
+      xml['ns2'].currency "USD"
+      xml['ns2'].billCycleDay "1"
+      xml['ns2'].status "Draft"
+    end
+    xml['ns1'].zObjects('xsi:type' => "ns2:Account") do
+      xml['ns2'].name "Test Account"
+      xml['ns2'].currency "USD"
+      xml['ns2'].billCycleDay "1"
+      xml['ns2'].status "Draft"
+    end
+   end
+end
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Response</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;soapenv:Envelope xmlns:soapenv=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;&gt;
+  &lt;soapenv:Body&gt;
+    &lt;ns1:createResponse xmlns:ns1=&quot;http://api.zuora.com/&quot;&gt;
+      &lt;ns1:result&gt;
+        &lt;ns1:Id&gt;2c92c0f8585839b50158692260c638eb&lt;/ns1:Id&gt;
+        &lt;ns1:Success&gt;true&lt;/ns1:Success&gt;
+      &lt;/ns1:result&gt;
+    &lt;/ns1:createResponse&gt;
+  &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<style>
+.panel{
+  border-radius: 0px;
+  border:none;
+}
+
+.panel-heading{
+  background-color: #E5E8EB !important;
+  border-color: #E5E8EB !important;
+}
+
+.panel-title, h1,h2,h3,h4,h5,h6,h7{
+  color: #384B5D;
+}
+
+.panel-body{
+  background-color: #E5E8EB;
+  color: #6B96A1;
+}
+
+pre{
+  padding:0px;
+  max-height:300px;
+}
+</style>
+
+
+

@@ -3,6 +3,10 @@ class Admin::AppInstancesController < Admin::ApplicationController
 
   def index
 
+    client = @appinstance.target_login.client
+    @response = client.getDataSourceExport("Select id from account")
+
+
     respond_to do |format|
       format.html { }
       format.json { render json: ::AppInstancesListDatatable.new(view_context) }

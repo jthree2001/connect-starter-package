@@ -10,6 +10,11 @@
         <pre class="prettyprint">
 client = @appinstance.target_login.client
 response = client.rest_call(:url => client.rest_endpoint("catalog/products"))
+resp["products"].each do |product|
+  if products.where(:name => product["name"]).size == 0
+    Product.create!(:name => product["name"], :price => product["productRatePlans"][0]["productRatePlanCharges"][0]["pricingSummary"][0], :category => product["category"])
+  end
+end
         </pre>
       </div>
     </div>
@@ -28,6 +33,69 @@ response = client.rest_call(:url => client.rest_endpoint("catalog/products"))
   </div>
 </div>
 
+<h3>Describe Call</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Request</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+client = @appinstance.target_login.client
+resp = client.describe_call
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Response</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+      <% client = @appinstance.target_login.client %>
+      <% resp = client.describe_call %>
+<%= JSON.pretty_generate(resp) %>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Describe Call (Specific Object)</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Request</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+client = @appinstance.target_login.client
+resp = client.describe_call("Account")
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Response</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+      <% client = @appinstance.target_login.client %>
+      <% resp = client.describe_call("Account") %>
+<%= JSON.pretty_generate(resp) %>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
 
 <style>
 
