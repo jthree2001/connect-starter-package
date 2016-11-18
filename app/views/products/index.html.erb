@@ -39,3 +39,31 @@
   $(products).dataTable().fnSettings().aoServerParams.push({"sName": "user", "fn": function (aoData) { aoData.push({ "name": "product_name", "value": $('#product_name').val() })}});
   $('#product_name').select2({width: "100%", theme: "bootstrap", containerCssClass: "form-control input-sm", width: "300px"}).on("change", function (e){$(products).dataTable().api().draw(false)});
 <% end %>
+
+<style>
+.panel{
+  border-radius: 0px;
+  border:none;
+}
+
+.panel-heading{
+  background-color: #E5E8EB !important;
+  border-color: #E5E8EB !important;
+}
+
+.panel-title{
+  color: #384B5D;
+}
+
+.panel-body{
+  background-color: #E5E8EB;
+  color: #6B96A1;
+}
+
+pre{
+  padding:0px;
+  max-height:300px;
+}
+
+
+</style>
