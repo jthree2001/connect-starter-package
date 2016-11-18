@@ -26,7 +26,7 @@ end
       </div>
       <div class="panel-body">
         <pre class="prettyprint">
-<%= JSON.pretty_generate(@appinstance.target_login.client.rest_call(:url => @appinstance.target_login.client.rest_endpoint("catalog/products"))) %>
+<%= JSON.pretty_generate(@appinstance.target_login.client.rest_call(:url => @appinstance.target_login.client.rest_endpoint("catalog/products"))[0]) %>
         </pre>
       </div>
     </div>

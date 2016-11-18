@@ -17,6 +17,7 @@
   { "title": "Name", "data": "products__name",'visible': true },
   { "title": "Type", "data": "products__category",'visible': true },
   { "title": "Price", "data": "products__price",'visible': true },
+  { "title": "Zuora Id", "data": "products__zuora_id",'visible': true },
   { "title": "Actions", "data": "products_actions", "class": "center", "bSortable": false,  "width": "250px" }
 ] %>
 <%= render(:partial=>"shared/table.html.erb", locals: {:table_name => "products", :aoData => [], :columns => columns, :sort => [[ 0, "asc" ]], :table_filters => table_filters, :table_views => {:table => true, :grid =>false}, :initial_size => 25, :table_actions => table_actions, :table_url =>  products_path(format: "json") }.merge(request.query_parameters), :formats => [:html])  %>

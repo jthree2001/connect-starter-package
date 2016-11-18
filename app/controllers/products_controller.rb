@@ -31,10 +31,17 @@ class ProductsController < ApplicationController
   end
 
   def create
+    product = Hash.new
+    product["Name"] = params["product"]["name"]
+    product["EffectiveStartDate"] = DateTime.now.strftime("%F")
+    product["EffectiveEndDate"] = 100.years.from_now.strftime("%F")
+    resp = @appinstance.target_login.client.rest_call(:url => @appinstance.target_login.client.rest_endpoint("object/product"), :method => :post, body: product.to_json, :debug => false)[0]
     @product = Product.new(product_params)
-
+    @product.zuora_id = resp["Id"]
+    puts resp
+    puts resp["Success"]
     respond_to do |format|
-      if @product.save
+      if resp["Success"] && @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.js { render action: 'redraw'}
       else
@@ -46,13 +53,16 @@ class ProductsController < ApplicationController
 
 
   def update
-    @product.assign_attributes(product_params)
 
+    product = Hash.new
+    product["Name"] = params["product"]["name"]
+    resp = @appinstance.target_login.client.rest_call(:url => @appinstance.target_login.client.rest_endpoint("object/product/#{@product.zuora_id}"), :method => :put, body: product.to_json, :debug => false)[0]
+    @product.assign_attributes(product_params)
     respond_to do |format|
-      if @product.save
+      if resp["Success"] && @product.save
         flash[:notice] = 'Product was successfully updated.'
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
-        format.js { render action: 'update'}
+        format.js { render action: 'redraw'}
       else
         format.html { redirect_to @product }
         format.js { render action: 'edit'}
@@ -61,7 +71,9 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    if @product.destroy
+    url = @appinstance.target_login.client.rest_endpoint("object/product/#{@product.zuora_id}")
+    resp = @appinstance.target_login.client.rest_call(:url => url, :method => :delete, :debug => false)
+    if resp[0]["success"] && @product.destroy
       respond_to do |format|
         format.html { redirect_to products_url, notice: 'Product was successfully deleted.' }
         format.js { render action: 'redraw'}
