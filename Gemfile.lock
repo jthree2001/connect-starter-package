@@ -126,7 +126,7 @@ GEM
       addressable (~> 2.3)
     letter_opener (1.4.1)
       launchy (~> 2.2)
-    libv8 (3.16.14.15)
+    libv8 (3.16.14.17)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -243,12 +243,12 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.1.5)
-    zuora_api (0.2.7.0)
+    zuora_api (0.2.7.2)
       httparty
       nokogiri (~> 1.6.8)
       railties (>= 4.1.0, < 5.1)
       rubyzip
-    zuora_connect (0.0.9.3.1)
+    zuora_connect (0.0.9.3.5)
       apartment (~> 1.2.0)
       bundler (~> 1.12)
       httparty (~> 0.14.0)
@@ -295,8 +295,8 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   will_paginate (~> 3.1.0)
-  zuora_api (~> 0.2.7.0)
-  zuora_connect (~> 0.0.9.3.0)
+  zuora_api (~> 0.2.7.2)
+  zuora_connect (~> 0.0.9.3.5)
 
 RUBY VERSION
    ruby 2.3.1p112
