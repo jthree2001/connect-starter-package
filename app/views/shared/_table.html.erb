@@ -23,7 +23,7 @@
 
 <div id='<%= "#{table_name}_content" %>'>
   <div class='row'>
-    <div class="col-lg-6 col-md-6 col-sm-5 col-xs-5" >
+    <div class="col-lg-5 col-md-6 col-sm-5 col-xs-5" >
       <div class="btn-group">
       <% if defined?(table_filters)  %>
         <% table_filters.each_with_index do |table_filter, index| %>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-sm-3 col-xs-3" style='padding: 0px;' >
+    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-3" style='padding: 0px;' >
       <div class="btn-group pull-right" style="display:inline;margin-right: 5px;">
         <%  if defined?(table_actions) && !table_actions.blank? %>
           <%=  table_actions  %>
@@ -47,7 +47,7 @@
         </div>
 
         <div class="btn-group">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="hold"  aria-haspopup="true" aria-expanded="false"><i class='fa fa-eye'></i></button>
+          <button id='<%= "#{table_name}_visiblity" %>' type="button" class="btn btn-default dropdown-toggle" data-toggle="hold"  aria-haspopup="true" aria-expanded="false"><i class='fa fa-eye'></i></button>
           <ul class="dropdown-menu table_visiblity" >
             <% columns.each_with_index  do |column, key| %>
               <li>
@@ -72,40 +72,39 @@
         <% grid_view = table_views[:grid] %>
 
         <div class="btn-group" data-toggle="buttons" >
-          <label class="btn btn-default <%= default_view == 'table' ? 'active' : '' %> <%= !table_view ? 'hidden' : '' %>">
+          <label id='<%= "#{table_name}_view_table" %>'class="btn btn-default <%= default_view == 'table' ? 'active' : '' %> <%= !table_view ? 'hidden' : '' %>">
             <input type="radio" name="<%= table_name %>[view_mode]" <%= default_view == 'table' ? 'checked' : '' %> value='table' />
             <span class="fa fa-table"></span>
           </label>
-          <label class="btn btn-default <%= default_view == 'grid' ? 'active' : '' %> <%= !grid_view ? 'hidden' : '' %>" >
+          <label id='<%= "#{table_name}_view_grid" %>'class="btn btn-default <%= default_view == 'grid' ? 'active' : '' %> <%= !grid_view ? 'hidden' : '' %>" >
             <input type="radio" name="<%= table_name %>[view_mode]" <%= default_view == 'grid' ? 'checked' : '' %> value='grid' />
             <span class="fa fa-th-large"></span>
+          </label>
+          <label id='<%= "#{table_name}_refresh" %>' class="btn btn-default table_refresh">
+            <i class="fa fa-refresh"></i>
           </label>
         </div>
         <%= select_tag(:table_size, options_for_select([['10','10'],['25','25'],['50','50'],['100','100']], initial_size.to_s ),  options = { :class => "btn btn-default", :style => '-webkit-appearance: none;-moz-appearance: none;height: 30px;'})%>
       </div>
     </div>
-    <div class="col-lg-3 col-md-2 col-sm-4">
-      <div class="input-group">
-        <input id='workflow_table_search' type="search" name='table[search]' class="form-control" placeholder='Search.....'>
-        <span class="input-group-btn">
-          <span class="btn btn-info table_refresh"><i class="fa fa-refresh "></i></span>
-        </span>
-      </div>
+    <div class="col-lg-3 col-md-2 col-sm-2">
+        <input id='<%= "#{table_name}_search" %>' type="search" name='table[search]' class="form-control" placeholder='Search.....'>
     </div>
   </div>
 
-  <table id='<%= "#{table_name}" %>' data-source="<%= table_url %>" class="table table-striped bootstrap-datatable datatable hidden" style="width: 100% !important;"></table>
+  <table id='<%= "#{table_name}" %>' data-source="<%= table_url %>" class="table bootstrap-datatable datatable hidden" style="width: 100% !important;"></table>
 </div>
 
 <% content_for :scripts do %>
   columns = <%= raw(columns.to_json) %>;
-  $.each(columns, function(index, column) {
+  $.each(columns, function(key, column) {
     $.each(column, function(key, value) {
-      if(key=='render'){columns[index][key] = new Function('data', 'type', 'row', value);};
+      if(key=='render'){columns[0][key] = new Function('data', 'type', 'row', value);};
     });
   });
+
   var <%= table_name %> = $('#<%= "#{table_name}_content" %>').find('table.datatable').dataTable({
-    "sDom": "rt<'row'<'grid_view col-lg-12'>><'row'<'col-lg-12 col-md-12'i><'col-lg-12 col-md-12 center'p>>",
+    "sDom": "t<'row'<'grid_view col-lg-12'>><'row'<'col-md-3'i><'col-lg-4'p>>",
     "pagingType": "full_numbers",
     "bProcessing": true,
     "bServerSide": true,
@@ -138,8 +137,8 @@
       <% end %>
     },
     "fnDrawCallback": function( oSettings ) {
-      $('#<%= "#{table_name}_content" %>').find('[rel="status_popover"], [data-rel="status_popover"]').popover({ placement: "left", html: 'true', container: '.table'});
-      $('#<%= "#{table_name}_content" %>').find('[data-toggle="tooltip"]').tooltip();
+      $('#<%= "#{table_name}_content" %>').find('.table [rel="status_popover"], .table[data-rel="status_popover"]').popover({ placement: "left", html: 'true', container: '.table'});
+      $('#<%= "#{table_name}_content" %>').find('.table [data-toggle="tooltip"]').tooltip();
       view_mode = $('#<%= "#{table_name}_content" %>').find('input[type=radio][name="<%= table_name %>[view_mode]"]:checked').val();
 
       $('#<%= "#{table_name}_content" %>').find('.grid_view').addClass('hidden');
@@ -162,6 +161,16 @@
       <%= table_name %>.find('input[type="checkbox"].select_row').on('click', function(e){
         if($('#<%= "#{table_name}_select_all" %>').is(':checked')){ $('#<%= "#{table_name}_select_all" %>').prop("checked", false);}
       });
+      if( <%= table_name %>.find('tr[processing="true"]').length > 0 && <%= table_name %>.is(":visible")){
+        setTimeout(function(){
+          <%= table_name %>.api().draw(false);
+        }, 1000);
+      }
+      if(<%= table_name %>.find('tr[processing="true"]').length > 0 && $('#<%= table_name %>_wrapper .grid_view').is(":visible")){
+        setTimeout(function(){
+          <%= table_name %>.api().draw(false);
+        }, 1000);
+      }
     },
     "fnServerData": function ( sSource, aoData, fnCallback, oSettings ) {
       data = aoData;
@@ -187,6 +196,12 @@
   }).on( 'draw.dt', function () {
     <% if debug %> console.log('Drawing Trigger <%= table_name %>'); <% end %>
     <%= table_name + '_cookie' %>();
+  }).on( 'processing.dt', function ( e, settings, processing ) {
+    if(processing){
+      $('#<%= "#{table_name}_content" %>').find('.table_refresh i').addClass('fa-spin');
+    }else{
+      $('#<%= "#{table_name}_content" %>').find('.table_refresh i').removeClass('fa-spin');
+    }
   });
 
   function <%= table_name + '_cookie' %>(){
