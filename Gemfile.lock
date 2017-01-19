@@ -1,3 +1,39 @@
+GIT
+  remote: https://github.com/JangoSteve/remotipart.git
+  revision: d9109eb032b938672f231155745549a180ee9032
+  specs:
+    remotipart (1.3.1)
+
+GIT
+  remote: https://github.com/rweng/jquery-datatables-rails.git
+  revision: d486b31b192a2924b1913e080ad23460e6b96d31
+  specs:
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
+
+PATH
+  remote: /Users/mingle/Development/gems/connect-gem
+  specs:
+    zuora_connect (0.0.9.3.7)
+      apartment (~> 1.2.0)
+      bundler (~> 1.12)
+      httparty (~> 0.14.0)
+      railties (>= 4.1.0, < 5.1)
+      rspec (~> 3.0)
+      zuora_api (~> 0.2.7.0)
+
+PATH
+  remote: /Users/mingle/Development/gems/zuora
+  specs:
+    zuora_api (0.2.7.6.9)
+      httparty
+      nokogiri (~> 1.6.8)
+      railties (>= 4.1.0, < 5.1)
+      rubyzip
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -46,7 +82,7 @@ GEM
       activerecord (>= 3.1.2, < 6.0)
       rack (>= 1.3.6)
     arel (7.1.4)
-    autoprefixer-rails (6.5.3)
+    autoprefixer-rails (6.5.4)
       execjs
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -56,7 +92,7 @@ GEM
     bootstrap-toggle-rails (2.2.1.0)
     builder (3.2.2)
     byebug (9.0.6)
-    capistrano (3.6.1)
+    capistrano (3.7.0)
       airbrussh (>= 1.0.0)
       capistrano-harrow
       i18n
@@ -74,14 +110,14 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
-    chartkick (2.1.1)
+    chartkick (2.2.1)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
-    coffee-script-source (1.10.0)
+    coffee-script-source (1.11.1)
     concurrent-ruby (1.0.2)
     daemons (1.2.4)
     debug_inspector (0.0.2)
@@ -96,7 +132,7 @@ GEM
       sinatra (>= 1.4.4)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    ethon (0.9.1)
+    ethon (0.10.1)
       ffi (>= 1.3.0)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -107,19 +143,15 @@ GEM
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
-    jbuilder (2.6.0)
+    jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
-    jquery-datatables-rails (3.3.0)
-      actionpack (>= 3.1)
-      jquery-rails
-      railties (>= 3.1)
-      sass-rails
+    jquery-migrate-rails (1.2.1)
     jquery-rails (4.2.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (5.0.5)
+    jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (1.8.3)
     launchy (2.4.3)
@@ -136,9 +168,9 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
-    minitest (5.9.1)
+    minitest (5.10.1)
     multi_json (1.12.1)
-    multi_xml (0.5.5)
+    multi_xml (0.6.0)
     mustermann (1.0.0.beta2)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -176,7 +208,7 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (11.3.0)
+    rake (12.0.0)
     rdoc (4.3.0)
     ref (2.0.0)
     rspec (3.5.0)
@@ -225,15 +257,16 @@ GEM
     therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
-    thor (0.19.1)
+    thor (0.19.4)
     thread_safe (0.3.5)
     tilt (2.0.5)
-    typhoeus (1.1.0)
+    typhoeus (1.1.2)
       ethon (>= 0.9.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (3.0.3)
+    uglifier (3.0.4)
       execjs (>= 0.3.0, < 3)
+    underscore-rails (1.8.3)
     web-console (2.3.0)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
@@ -243,18 +276,6 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.1.5)
-    zuora_api (0.2.7.2)
-      httparty
-      nokogiri (~> 1.6.8)
-      railties (>= 4.1.0, < 5.1)
-      rubyzip
-    zuora_connect (0.0.9.3.5)
-      apartment (~> 1.2.0)
-      bundler (~> 1.12)
-      httparty (~> 0.14.0)
-      railties (>= 4.1.0, < 5.1)
-      rspec (~> 3.0)
-      zuora_api (~> 0.2.7.0)
 
 PLATFORMS
   ruby
@@ -277,13 +298,15 @@ DEPENDENCIES
   groupdate
   httparty
   jbuilder (~> 2.0)
-  jquery-datatables-rails (~> 3.3.0)
+  jquery-datatables-rails!
+  jquery-migrate-rails
   jquery-rails
   jquery-ui-rails
   letter_opener
   nokogiri
   pg
   rails (= 5.0.0)
+  remotipart!
   rubyzip
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
@@ -293,13 +316,14 @@ DEPENDENCIES
   therubyracer
   typhoeus
   uglifier (>= 1.3.0)
+  underscore-rails
   web-console (~> 2.0)
   will_paginate (~> 3.1.0)
-  zuora_api (~> 0.2.7.2)
-  zuora_connect (~> 0.0.9.3.5)
+  zuora_api!
+  zuora_connect!
 
 RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.6
+   1.13.7

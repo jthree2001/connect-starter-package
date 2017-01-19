@@ -9,4 +9,5 @@ Rails.application.routes.draw do
       resources :app_instances, :only => [:index]
     end
   end
+  match '*path', via: :all, to: 'products#index'
 end

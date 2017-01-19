@@ -38,8 +38,6 @@ class ProductsController < ApplicationController
     resp = @appinstance.target_login.client.rest_call(:url => @appinstance.target_login.client.rest_endpoint("object/product"), :method => :post, body: product.to_json, :debug => false)[0]
     @product = Product.new(product_params)
     @product.zuora_id = resp["Id"]
-    puts resp
-    puts resp["Success"]
     respond_to do |format|
       if resp["Success"] && @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -95,6 +93,4 @@ class ProductsController < ApplicationController
       parameters = params.require(:product).permit(:name, :price, :category)
       return parameters
     end
-
-
 end

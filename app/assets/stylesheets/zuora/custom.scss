@@ -57,11 +57,11 @@ form {
       }
     }
   }
-  .overlay { 
-    display: none;      
-    position: absolute;  
-    top: 0;               
-    right: 0;                
+  .overlay {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
     bottom: 61px;
     left: 0;
 
@@ -99,20 +99,20 @@ i#loading_form_icon {
   }
 }
 
-.green-header {    
-  color:#fff;   
-  padding: 10px;    
-  font-size:18px;   
-  background-color:#6ec5ab;   
-  border-radius: 2px;   
+.green-header {
+  color:#fff;
+  padding: 10px;
+  font-size:18px;
+  background-color:#6ec5ab;
+  border-radius: 2px;
 
   h2 {
-    font-size:19px;   
-    color:#fff;   
-    letter-spacing:0px;   
-    margin:0px;  
+    font-size:19px;
+    color:#fff;
+    letter-spacing:0px;
+    margin:0px;
   }
-}   
+}
 
 .tab-pane{
   margin-top:10px;
@@ -227,7 +227,7 @@ body nav .navbar-toggle.left {
     position: relative;
     height: 30px;
     cursor: pointer;
-    
+
     .icon-bar{
       width: 20px;
       margin-top: 4px;
@@ -251,7 +251,7 @@ body nav .navbar-toggle.left {
       &:before {
         font-size: inherit;
         position: inherit;
-        color: $dropdown-link-color; 
+        color: $dropdown-link-color;
       }
     }
     &:hover{
@@ -306,8 +306,8 @@ body nav .navbar-toggle.left {
   z-index: 1;
 
   > div.navigation {
-    text-align: right; 
-    padding: 5px 10px; 
+    text-align: right;
+    padding: 5px 10px;
     background: #f1f1f1;
     height: 32px;
     > span {
@@ -363,7 +363,7 @@ body nav .navbar-toggle.left {
         }
       }
       > div.collapse {
-        background-color:#f2f4f8; 
+        background-color:#f2f4f8;
       }
 
       /* Sub menu overides */

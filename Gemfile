@@ -14,10 +14,12 @@ gem 'groupdate'
 gem 'chartkick'
 
 gem "select2-rails"
-gem 'jquery-datatables-rails', '~> 3.3.0'
-gem 'zuora_api', '~> 0.2.7.2'
-gem 'zuora_connect', '~> 0.0.9.3.5'
+gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
+#gem 'zuora_api', '~> 0.2.7.2'
+#gem 'zuora_connect', '~> 0.0.9.3.5'
 
+gem 'zuora_api', :path => '/Users/mingle/Development/gems/zuora'
+gem 'zuora_connect', :path => '/Users/mingle/Development/gems/connect-gem'
 
 gem "delayed_job"
 gem "delayed_job_active_record"
@@ -42,6 +44,8 @@ gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'jquery-migrate-rails'
+gem 'underscore-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 #gem 'turbolinks'
@@ -49,6 +53,8 @@ gem 'jquery-ui-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 gem 'rubyzip'
+
+gem 'remotipart', :git => 'https://github.com/JangoSteve/remotipart.git'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
