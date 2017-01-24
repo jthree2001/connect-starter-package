@@ -1,4 +1,4 @@
-class ProductsDatatable
+pclass ProductsDatatable
   delegate :controller, :url_for, :render, :params, :image_tag, :h, :link_to, :api_call_path, :number_to_currency, to: :@view
 
   def initialize(view)
@@ -9,6 +9,7 @@ class ProductsDatatable
     @filtered_total = @products.size
     @products = @products.page(page).per_page(per_page)
   end
+
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
