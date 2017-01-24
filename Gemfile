@@ -18,8 +18,8 @@ gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatable
 #gem 'zuora_api', '~> 0.2.7.2'
 #gem 'zuora_connect', '~> 0.0.9.3.5'
 
-gem 'zuora_api', :path => '/Users/mingle/Development/gems/zuora'
-gem 'zuora_connect', :path => '/Users/mingle/Development/gems/connect-gem'
+gem 'zuora_api'
+gem 'zuora_connect'
 
 gem "delayed_job"
 gem "delayed_job_active_record"
