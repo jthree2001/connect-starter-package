@@ -15,9 +15,6 @@ gem 'chartkick'
 
 gem "select2-rails"
 gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
-#gem 'zuora_api', '~> 0.2.7.2'
-#gem 'zuora_connect', '~> 0.0.9.3.5'
-
 gem 'zuora_api'
 gem 'zuora_connect'
 
