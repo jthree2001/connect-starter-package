@@ -77,23 +77,7 @@
     </div>
 
     <div class="modal fade" id="z_hub_modal" style="display: none;" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title"> Testing</h4>
-          </div>
-          <div class="modal-body z-background " id="z_hub_modal_body">
-            <div class="row">
-              <div class="col-lg-11 col-md-11 ">
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
+      <%= yield :modal %>
     </div>
 
     <script type="text/javascript">

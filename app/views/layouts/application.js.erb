@@ -1,22 +1,31 @@
-<%= yield %>
-<% Array(error).each do |er| %>
-  noty({text: "<%= error %>", layout: "topRight",type: "error", animateOpen: {opacity: "show"}, closeWith: ["hover"]});
-<% end %>
-<% Array(alert).each do |al| %>
-  noty({text: "<%= alert %>", layout: "topRight",type: "warning", animateOpen: {opacity: "show"}, closeWith: ["hover"]});
-<% end %>
-<% Array(notice).each do |no| %>
-  noty({text: "<%= notice %>", layout: "topRight",type: "success", animateOpen: {opacity: "show"}, closeWith: ["hover"]});
-<% end %>
-<% flash.discard(:notice); flash.discard(:error); flash.discard(:alert) %>
 
 <% if content_for?(:breadcrumbs) %>
   $('#breadcrumbs').html("<%= escape_javascript yield :breadcrumbs %>");
 <% end %>
-$('#content').find('.dropdown-toggle[data-toggle="hold"]').dropdownHold();
-$('body').find(".nav.tab-header a:not('.skip'), #content .nav.nav-tabs a:not('.skip'), .modal-content .nav.tab-header a:not('.skip')").click(function (e) {e.preventDefault(); $(this).tab('show')});
-$('#z_hub_modal input[type="submit"]').click(function(e){
-  $(this).button('loading');
-  $(this).parents('form').addClass('loading');
-});
-<%= content_for :scripts %>
+
+<% if content_for?(:modal) %>
+  $('#z_hub_modal').html("<%= escape_javascript yield :modal %>");
+  $('#z_hub_modal input[type="submit"]').click(function(e){
+    if($(this).hasClass('show-load')){
+      $(this).parents('form').addClass('loading');
+    }
+    $(this).button('loading')
+  });
+<% end %>
+
+//Yield js partials
+<%= yield %>
+
+//Yield scripts from html partials
+<%= yield :scripts %>
+
+<% Array(error).each do |er| %>
+  noty({text: "<%= er %>", layout: "topRight",type: "error", animateOpen: {opacity: "show"}, closeWith: ["hover"], timeout: 2000});
+<% end %>
+<% Array(alert).each do |al| %>
+  noty({text: "<%= al %>", layout: "topRight",type: "warning", animateOpen: {opacity: "show"}, closeWith: ["hover"], timeout: 2000});
+<% end %>
+<% Array(notice).each do |no| %>
+  noty({text: "<%= no %>", layout: "topRight",type: "success", animateOpen: {opacity: "show"}, closeWith: ["hover"], timeout: 2000});
+<% end %>
+<% flash.discard(:notice); flash.discard(:error); flash.discard(:alert) %>

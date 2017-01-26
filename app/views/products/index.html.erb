@@ -17,16 +17,16 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="rest">
-        <%= render 'rest' %>
+        <%= render 'rest', cached: true %>
       </div>
       <div class="tab-pane" id="soap">
-        <%= render 'soap' %>
+        <%= render 'soap',cached: true %>
       </div>
       <div class="tab-pane" id="gem">
-        <%= render 'features' %>
+        <%= render 'features',cached: true %>
       </div>
       <div class="tab-pane" id="table">
-        <%= render 'products' %>
+        <%= render 'products',cached: true %>
       </div>
       <div class="tab-pane" id="jobs">
       </div>

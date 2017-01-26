@@ -1,4 +1,4 @@
-pclass ProductsDatatable
+class ProductsDatatable
   delegate :controller, :url_for, :render, :params, :image_tag, :h, :link_to, :api_call_path, :number_to_currency, to: :@view
 
   def initialize(view)
