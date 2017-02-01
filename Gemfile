@@ -15,8 +15,8 @@ gem 'chartkick'
 
 gem "select2-rails"
 gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
-gem 'zuora_api'
-gem 'zuora_connect'
+gem 'zuora_api', '~> 1.1.0'
+gem 'zuora_connect', '~> 1.1.0'
 
 gem "delayed_job"
 gem "delayed_job_active_record"
