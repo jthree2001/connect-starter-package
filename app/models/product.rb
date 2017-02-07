@@ -1,4 +1,5 @@
 class Product < ActiveRecord::Base
+
   before_destroy :delete_in_zuora
   before_create :create_in_zuora
   before_update :update_in_zuora
