@@ -1,1 +1,1 @@
-<%%  render(:file=>"<%= plural_table_name%>/show", locals: {}, :formats => [:html] ) %>
+<%%  render(:file=>"<%= controller_class_name.to_s.pluralize.underscore %>/show", locals: {}, :formats => [:html] ) %>

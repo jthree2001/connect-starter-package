@@ -24,7 +24,7 @@
             <%% end %>
           </div>
         <%% end %>
-        <%%= render_datatable(<%= singular_table_name.capitalize %>, <%= singular_table_name %>s_path(format: "json"), :table_actions => table_actions) %>
+        <%%= render_datatable(<%= controller_class_name.singularize %>, <%= singular_table_name %>s_path(format: "json"), :table_actions => table_actions) %>
       </div>
     </div>
   </div>

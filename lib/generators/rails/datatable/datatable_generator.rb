@@ -4,7 +4,7 @@ class DatatableGenerator < Rails::Generators::NamedBase
     columns = "#{class_name}".constantize.send("column_names")
     column_data = []
     columns.each do |col|
-      column_data << "\"#{plural_name}__#{col}\" => #{plural_name.singularize}.#{col}"
+      column_data << "\"#{class_name.pluralize.underscore}__#{col}\" => #{class_name.singularize.underscore.gsub!("/", "_")}.#{col}"
     end
 
     create_file "app/datatables/#{file_name}_datatable.rb", <<-FILE
@@ -13,10 +13,10 @@ class #{class_name}Datatable
 
   def initialize(view)
     @view = view
-    @total_#{plural_name} = #{class_name}.count(:all)
-    @#{plural_name} = #{class_name}.select(select_string).where(search_string, search: "%\#{params[:sSearch].to_s.downcase}%").order("\#{sort_column} \#{sort_direction}")
-    @filtered_total = @#{plural_name}.size
-    @#{plural_name} = @#{plural_name}.page(page).per_page(per_page)
+    @total_#{class_name.pluralize.underscore.gsub!("/", "_")} = #{class_name}.count(:all)
+    @#{class_name.pluralize.underscore.gsub!("/", "_")} = #{class_name}.select(select_string).where(search_string, search: "%\#{params[:sSearch].to_s.downcase}%").order("\#{sort_column} \#{sort_direction}")
+    @filtered_total = @#{class_name.pluralize.underscore.gsub!("/", "_")}.size
+    @#{class_name.pluralize.underscore.gsub!("/", "_")} = @#{class_name.pluralize.underscore.gsub!("/", "_")}.page(page).per_page(per_page)
   end
 
   def as_json(options = {})
@@ -24,25 +24,25 @@ class #{class_name}Datatable
       sEcho: params[:sEcho].to_i,
       iTotalDisplayRecords: @filtered_total,
       aaData: data,
-      iTotalRecords: @total_#{plural_name},
+      iTotalRecords: @total_#{class_name.pluralize.underscore.gsub!("/", "_")},
     }
   end
 
 private
   def data
-    @#{plural_name}.map do |#{plural_name.singularize}|
+    @#{class_name.pluralize.underscore.gsub!("/", "_")}.map do |#{class_name.singularize.underscore.gsub!("/", "_")}|
       {
-        DT_RowId: #{plural_name.singularize}.id.to_s,
+        DT_RowId: #{class_name.singularize.underscore.gsub!("/", "_")}.id.to_s,
         DT_RowClass: nil,
         DT_RowAttr: { },
         #{column_data.join(",\n\t\t\t\t")},
-        #{plural_name}_actions: actions(#{plural_name.singularize}),
+        #{class_name.pluralize.underscore.gsub!("/", "_")}_actions: actions(#{class_name.singularize.underscore.gsub!("/", "_")}),
       }
     end
   end
 
-  def actions(#{plural_name.singularize})
-    render(:partial=>"#{plural_name}/actions.html.erb", locals: { #{plural_name.singularize}: #{plural_name.singularize}} , :formats => [:html]) if params[:table_view_mode] == 'table'
+  def actions(#{class_name.singularize.underscore.gsub!("/", "_")})
+    render(:partial=>"#{class_name.to_s.pluralize.underscore}/actions.html.erb", locals: { #{class_name.singularize.underscore.gsub!("/", "_")}: #{class_name.singularize.underscore.gsub!("/", "_")}} , :formats => [:html]) if params[:table_view_mode] == 'table'
   end
 
   def display_time(time)
@@ -64,12 +64,12 @@ private
       if !field.blank? && !object.blank?
         map = {"#{class_name}" => #{class_name}}
         field_type = map[object.classify].column_for_attribute(field).type
-        return [:string, :text].include?(field_type) ? "lower(\#{col})" : col
+        return [:string, :text].include?(field_type) ? "lower(\#{col.gsub!("/", "_")})" : col
       else
         return col
       end
     else
-      return  "#{plural_name}.id"
+      return  "#{class_name.pluralize.underscore.gsub!("/", "_")}.id"
     end
   end
 
@@ -78,11 +78,11 @@ private
   end
 
   def search_string
-    "to_char(#{plural_name}.id, '999999999') LIKE :search "
+    "to_char(#{class_name.pluralize.underscore.gsub!("/", "_")}.id, '999999999') LIKE :search "
   end
 
   def select_string
-    "#{plural_name}.*"
+    "#{class_name.pluralize.underscore.gsub!("/", "_")}.*"
   end
 end
     FILE

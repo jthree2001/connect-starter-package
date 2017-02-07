@@ -1,5 +1,5 @@
 <%% if request.format == :html %>
-  <%%= render(:file=>"<%= plural_table_name%>/index", :formats => [:html]) %>
+  <%%= render(:file=>"<%= controller_class_name.to_s.pluralize.underscore %>/index", :formats => [:html]) %>
 <%% end %>
 
 <%% content_for :modal do %>
