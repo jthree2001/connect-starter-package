@@ -21,13 +21,13 @@ module ApplicationHelper
       columns << { "title": "#{col.split('_').collect(&:capitalize).join(' ')}", "data": "#{object.to_s.pluralize.underscore}__#{col}",'visible': true } if col != "actions"
     end
     if cols.nil? || ( !cols.nil? && column_names.include?("actions"))
-      columns << { "title": "Actions", "data": "#{object.to_s.underscore.gsub!('/', '_')}s_actions", "class": "center", "bSortable": false,  "width": "250px" }
+      columns << { "title": "Actions", "data": "#{object.to_s.underscore.gsub('/', '_')}s_actions", "class": "center", "bSortable": false,  "width": "250px" }
     end
     return columns
   end
 
   def render_datatable(object, table_url ,columns: nil,table_name: nil, aoData: [], initial_size: 25 ,table_views: {:table => true, :grid =>false}, table_filters: {}, table_actions: nil, sort: [[ 0, "asc" ]])
-    table_name = object.to_s.pluralize.underscore.gsub!("/", "_") if table_name.nil?
+    table_name = object.to_s.pluralize.underscore.gsub("/", "_") if table_name.nil?
     columns = datatable_columns(object) if columns.nil?
     render(:partial=>"shared/table.html.erb", locals: {:table_name => table_name, :aoData => aoData, :columns => columns, :sort => sort, :table_filters => table_filters, :table_views => table_views, :initial_size => initial_size, :table_actions => table_actions, :table_url =>  table_url }.merge(request.query_parameters), :formats => [:html])
   end
