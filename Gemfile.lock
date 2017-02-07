@@ -68,7 +68,7 @@ GEM
       activerecord (>= 3.1.2, < 6.0)
       rack (>= 1.3.6)
     arel (7.1.4)
-    autoprefixer-rails (6.7.0)
+    autoprefixer-rails (6.7.2)
       execjs
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -78,7 +78,7 @@ GEM
     bootstrap-toggle-rails (2.2.1.0)
     builder (3.2.3)
     byebug (9.0.6)
-    capistrano (3.7.1)
+    capistrano (3.7.2)
       airbrussh (>= 1.0.0)
       capistrano-harrow
       i18n
@@ -124,11 +124,11 @@ GEM
     ffi (1.9.17)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
-    groupdate (3.1.1)
+    groupdate (3.2.0)
       activesupport (>= 3)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
-    i18n (0.7.0)
+    i18n (0.8.0)
     jbuilder (2.6.1)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -267,7 +267,7 @@ GEM
       nokogiri (~> 1.6.8)
       railties (>= 4.1.0, < 5.1)
       rubyzip
-    zuora_connect (1.1.0)
+    zuora_connect (1.1.9)
       activerecord-session_store
       apartment (~> 1.2.0)
       bundler (~> 1.12)
@@ -319,7 +319,7 @@ DEPENDENCIES
   web-console (~> 2.0)
   will_paginate (~> 3.1.0)
   zuora_api (~> 1.1.0)
-  zuora_connect (~> 1.1.0)
+  zuora_connect (~> 1.1.9)
 
 RUBY VERSION
    ruby 2.3.1p112

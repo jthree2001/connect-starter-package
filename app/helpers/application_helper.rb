@@ -14,13 +14,13 @@ module ApplicationHelper
     checked_envs ||= defaults.nil? ? (type == "checkbox" ? values : nil) : defaults
   end
 
-  def datatable_columns(object, columns = nil)
-    column_names = columns.nil? ? object.column_names : columns
+  def datatable_columns(object, cols = nil)
+    column_names = cols.nil? ? object.column_names : cols
     columns = []
     column_names.each do |col|
       columns << { "title": "#{col.split('_').collect(&:capitalize).join(' ')}", "data": "#{object.to_s.pluralize.underscore}__#{col}",'visible': true } if col != "actions"
     end
-    if columns.nil? || ( !columns.nil? && column_names.include?("actions"))
+    if cols.nil? || ( !cols.nil? && column_names.include?("actions"))
       columns << { "title": "Actions", "data": "#{object.to_s.underscore}s_actions", "class": "center", "bSortable": false,  "width": "250px" }
     end
     return columns
