@@ -1,3 +1,1 @@
-$('#z_hub_modal').html('<%= escape_javascript render(:file=>"products/edit", :formats => [:html]) %>');
-$('#z_hub_modal').modal("show");
-<%= content_for :scripts %>
+<%  render(:file=>"products/edit", locals: {}, :formats => [:html] ) %>

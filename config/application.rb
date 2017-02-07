@@ -23,5 +23,9 @@ module WorkflowEngine
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
+    config.generators do |g|
+      g.jbuilder          false
+      g.templates.unshift File::expand_path("../templates", File.dirname(__FILE__))
+    end
   end
 end

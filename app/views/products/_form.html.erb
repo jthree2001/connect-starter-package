@@ -1,64 +1,69 @@
-<%= form_for(@product, {:url => url_for(:controller => controller.controller_name, :action => ['update','edit'].include?(controller.action_name) ? 'update' : 'create'), remote: true,  authenticity_token: true, :html => {:multipart => true, :class=>'form-horizontal'}}) do |f| %>
-  <div class="modal-dialog" style="width: 800px">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title"><%= ['update','edit'].include?(controller.action_name) ? "Update" : "New" %> Product</h4>
-      </div>
-      <div class="overlay">
-        <i id="loading_form_icon" class="glyphicon glyphicon-refresh glyphicon-spin"></i>
-      </div>
-      <div class="modal-body z-background">
-        <% if f.object.errors[:base].size > 0 %>
-          <div class="alert alert-danger" role="alert">
-            <ul>
-              <% f.object.errors[:base].uniq.each do | message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-
-        <div class="row form-group">
-          <div class="col-lg-12 col-md-12 controls <%= f.object.errors[:name].empty? ? '' : 'has-error has-feedback' %>">
-            <%= f.text_field :name, {:class => 'form-control', :placeholder => true} %>
-            <%= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'.html_safe if !f.object.errors[:name].empty?  %>
-            <% f.object.errors[:name].uniq.each do | message| %>
-               <p class="help-block" ><%= message %></p>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="row form-group">
-          <div class="col-lg-12 col-md-12 controls <%= f.object.errors[:category].empty? ? '' : 'has-error has-feedback' %>">
-            <%= f.text_field :category, {:class => 'form-control', :placeholder => true} %>
-            <%= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'.html_safe if !f.object.errors[:category].empty?  %>
-            <% f.object.errors[:category].uniq.each do | message| %>
-               <p class="help-block" ><%= message %></p>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="row form-group">
-          <div class="col-lg-12 col-md-12 controls <%= f.object.errors[:price].empty? ? '' : 'has-error has-feedback' %>">
-            <%= f.text_field :price, {:class => 'form-control', :placeholder => true} %>
-            <%= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'.html_safe if !f.object.errors[:price].empty?  %>
-            <% f.object.errors[:price].uniq.each do | message| %>
-               <p class="help-block" ><%= message %></p>
-            <% end %>
-          </div>
-        </div>
-
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= f.submit :class => "btn btn-primary", :value => ['update','edit'].include?(controller.action_name) ? "Update" : "Create" %>
-      </div>
-    </div>
-  </div>
+<% if request.format == :html %>
+  <%= render(:file=>"products/index", :formats => [:html]) %>
 <% end %>
 
-<% content_for :scripts do %>
+<% content_for :modal do %>
+  <%= form_for(@product, {:url => url_for(:controller => controller.controller_name, :action => ['update','edit'].include?(controller.action_name) ? 'update' : 'create'), remote: true,  authenticity_token: true, :html => {:multipart => true, :class=>'form-horizontal'}}) do |f| %>
+    <div class="modal-dialog" style="width: 800px">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title"><%= ['update','edit'].include?(controller.action_name) ? "Update" : "New" %> Product</h4>
+        </div>
+        <div class="overlay">
+          <i id="loading_form_icon" class="glyphicon glyphicon-refresh glyphicon-spin"></i>
+        </div>
+        <div class="modal-body z-background">
+          <% if f.object.errors[:base].size > 0 %>
+            <div class="alert alert-danger" role="alert">
+              <ul>
+                <% f.object.errors[:base].uniq.each do | message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
 
+          <div class="row form-group">
+            <div class="col-lg-12 col-md-12 controls <%= f.object.errors[:name].empty? ? '' : 'has-error has-feedback' %>">
+              <%= f.text_field :name, {:class => 'form-control', :placeholder => true} %>
+              <%= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'.html_safe if !f.object.errors[:name].empty?  %>
+              <% f.object.errors[:name].uniq.each do | message| %>
+                 <p class="help-block" ><%= message %></p>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-lg-12 col-md-12 controls <%= f.object.errors[:category].empty? ? '' : 'has-error has-feedback' %>">
+              <%= f.text_field :category, {:class => 'form-control', :placeholder => true} %>
+              <%= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'.html_safe if !f.object.errors[:category].empty?  %>
+              <% f.object.errors[:category].uniq.each do | message| %>
+                 <p class="help-block" ><%= message %></p>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-lg-12 col-md-12 controls <%= f.object.errors[:price].empty? ? '' : 'has-error has-feedback' %>">
+              <%= f.text_field :price, {:class => 'form-control', :placeholder => true} %>
+              <%= '<span class="glyphicon glyphicon-remove form-control-feedback"></span>'.html_safe if !f.object.errors[:price].empty?  %>
+              <% f.object.errors[:price].uniq.each do | message| %>
+                 <p class="help-block" ><%= message %></p>
+              <% end %>
+            </div>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <%= f.submit :class => "btn btn-primary", :value => ['update','edit'].include?(controller.action_name) ? "Update" : "Create" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+<% content_for :scripts do %>
+  $('#z_hub_modal').modal("show");
 <% end %>

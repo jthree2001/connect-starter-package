@@ -17,28 +17,22 @@
     </ul>
     <div class="tab-content">
       <div class="tab-pane active" id="rest">
-        <%= render 'rest' %>
+        <%= render 'rest', cached: true %>
       </div>
       <div class="tab-pane" id="soap">
-        <%= render 'soap' %>
+        <%= render 'soap',cached: true %>
       </div>
       <div class="tab-pane" id="gem">
-        <%= render 'features' %>
+        <%= render 'features',cached: true %>
       </div>
       <div class="tab-pane" id="table">
-        <%= render 'products' %>
+        <%= render 'products',cached: true %>
       </div>
       <div class="tab-pane" id="jobs">
       </div>
     </div>
   </div>
 </div>
-
-
-<% content_for :scripts do %>
-  $(products).dataTable().fnSettings().aoServerParams.push({"sName": "user", "fn": function (aoData) { aoData.push({ "name": "product_name", "value": $('#product_name').val() })}});
-  $('#product_name').select2({width: "100%", theme: "bootstrap", containerCssClass: "form-control input-sm", width: "300px"}).on("change", function (e){$(products).dataTable().api().draw(false)});
-<% end %>
 
 <style>
 .panel{

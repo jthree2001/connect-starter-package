@@ -2,42 +2,65 @@
 // listed below.
 //
 // Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
 //
 // It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
+// the compiled file.
 //
-// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
-// about supported directives.
+// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
+// GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.remotipart
+//= require jquery-migrate-min
 //= require jquery_ujs
+//= require jquery-ui
+//= require jquery.ba-resize
+//= require js-cookie
 //= require jquery.noty
+//= require jquery.nestable
+//= require jquery.validate
+//= require jquery.tableofcontents.min
+//
+//************ cronGen ************
+//= require js/cronGen.js
+//
 //************ Bootstrap ************
 //= require bootstrap-sprockets
-//= require bootstrap-toggle
+//= require bootstrap-hover-dropdown
 //
 //************ Datatables ************
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require dataTables/extras/dataTables.responsive
+//= require dataTables/extras/dataTables.responsive
+//= require dataTables/extras/dataTables.colReorder
+//= require dataTables/extras/dataTables.select
+//
+//************ Elfinder ************
+//= require js/elfinder.min.js
+//= require js/proxy/elFinderSupportVer1.js
+//
+//************ fuelUxWizard ************
+//= require js/fuelUxWizard.min
 //
 //************ Select2 ************
 //= require select2-full
-//
-//************ cronGen ************
-//= require js/cronGen.js
+//= require select2_locale_en
+//= require select2_locale_fr
+//= require select2_locale_zh-CN
 //
 //************ SummerNote ************
 //= require js/summernote.js
 //
-//************ Highlight ************
-//= require js/highlight.pack.js
+//************ UnderScore ************
+//= require underscore
 //
-//= require js/JSONEditor.js
-//= require js-cookie.js
-//
-//= require Chart.bundle
+//************ Chart kick ************
 //= require chartkick
+//= require js/highcharts
+//
+//***********ContextMenu********
+//= require js/jquery.contextMenu.min.js
 //
 //= require_tree .
