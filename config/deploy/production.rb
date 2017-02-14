@@ -12,15 +12,17 @@
 # extended properties on the server.
 require 'net/ssh/proxy/command'
 
+set :ssh_options, forward_agent: true, auth_methods: ["publickey"],keys: ['~/rbm-prod.pem'],proxy: Net::SSH::Proxy::Command.new('ssh mingle@10.109.253.216 -W %h:%p')
+
 #Front end
-server  '1.1.1.1' , roles: [:web, :app, :worker, :db], user: 'deploy'
+server  '10.240.2.241' , roles: [:web, :app], user: 'deploy'
 
 set :deploy_to, '/var/www/apps/production'
 set :rails_env, "production"
 set :branch, "master"
-set :deployment_server, :passenger
 
 set :rvm_type, :system
 set :rvm_ruby_version, '2.3.1'
+
 
 
