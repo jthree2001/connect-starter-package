@@ -2,14 +2,9 @@ class Admin::AppInstancesController < Admin::ApplicationController
   before_action :set_app_instance, only: [:edit, :update, :message]
 
   def index
-
-    client = @appinstance.target_login.client
-    @response = client.getDataSourceExport("Select id from account")
-
-
     respond_to do |format|
       format.html { }
-      format.json { render json: ::AppInstancesListDatatable.new(view_context) }
+      format.json { render json: ZuoraConnect::AppInstanceDatatable.new(view_context) }
       format.js { }
     end
   end

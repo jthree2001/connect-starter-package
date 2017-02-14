@@ -1,16 +1,5 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address => Rails.application.secrets.mailer['address'],
-    :port => Rails.application.secrets.mailer['port'],
-    :user_name => Rails.application.secrets.mailer['user_name'],
-    :password => Rails.application.secrets.mailer['password'],
-    :authentication => :login,
-    :enable_starttls_auto => true,
-    :tls => true
-  }
-
   # Code is not reloaded between requests.
   config.cache_classes = true
   config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
