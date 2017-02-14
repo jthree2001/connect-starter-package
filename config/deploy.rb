@@ -6,7 +6,7 @@ set :use_sudo, false
 set :deploy_user, 'deploy'
 set :deploy_user_group, 'deployers'
 
-set :repo_url, ''
+set :repo_url, 'ssh://git@intranet.zuora.com:7999/rbm/connectstarter.git'
 set :deploy_via, :remote_cache
 set :keep_releases, 2
 
@@ -64,7 +64,19 @@ namespace :deploy do
     end
   end
 
+  task :restart_workers do
+    desc "Restart Delayed Job Workers"
+    on roles(:worker),in: :sequence, wait: 5 do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute "RAILS_ENV=#{fetch :rails_env} #{release_path}/bin/delayed_job -n 2 restart"
+        end
+      end
+    end
+  end
+
   before 'deploy:symlink:release', :mod_files
   after :publishing, :restart
   after :restart, :clear_cache
+  after :restart, :restart_workers
 end
