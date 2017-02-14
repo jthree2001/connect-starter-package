@@ -12,15 +12,16 @@
 # extended properties on the server.
 require 'net/ssh/proxy/command'
 
+
 #Front end
-server  '1.1.1.1' , roles: [:web, :app, :worker, :db], user: 'deploy'
+server  '1.1.1.1' , roles: [:web, :app], user: 'deploy'
 
 set :deploy_to, '/var/www/apps/production'
 set :rails_env, "production"
 set :branch, "master"
-set :deployment_server, :passenger
 
 set :rvm_type, :system
 set :rvm_ruby_version, '2.3.1'
+
 
 

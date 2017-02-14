@@ -61,12 +61,16 @@ group :development, :test do
   gem 'byebug'
 end
 
+group :production do
+  gem 'unicorn'
+  gem 'unicorn-worker-killer'
+end
+
 group :development do
   #deployment scripts
   gem "capistrano"
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
-  gem 'capistrano-passenger'
   gem 'capistrano-rvm'
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
