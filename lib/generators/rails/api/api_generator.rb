@@ -1,5 +1,14 @@
 class ApiGenerator < Rails::Generators::NamedBase
 
+
+    def add_routes
+      unless options[:skip_routes]
+        # route prepends two spaces onto the front of the string that is passed, this corrects that.
+        route indent(generate_routing_code(["index", "show"]), 2)[2..-1]
+      end
+    end
+
+
   def create_API_file
 
     require 'active_record'
@@ -57,7 +66,7 @@ class ApiGenerator < Rails::Generators::NamedBase
 #create views
     create_file "app/views/api/v1/#{file_name}/_#{file_name.singularize}.json.jbuilder", <<-FILE
       #{json_data.join("\n")},
-    
+
     FILE
 
     create_file "app/views/api/v1/#{file_name}/index.json.jbuilder", <<-FILE
@@ -83,5 +92,46 @@ class ApiGenerator < Rails::Generators::NamedBase
     FILE
 
   end
+ private
+
+    # This method creates nested route entry for namespaced resources.
+    # For eg. rails g controller foo/bar/baz index
+    # Will generate -
+    # namespace :foo do
+    #   namespace :bar do
+    #     get 'baz/index'
+    #   end
+    # end
+    def generate_routing_code(actions)
+      depth = 0
+      lines = []
+
+      # Create 'namespace' ladder
+      # namespace :foo do
+      #   namespace :bar do
+
+      new_class_path = ["api", "v1"]
+      regular_class_path.each do |ns|
+        new_class_path << ns
+      end
+      new_class_path.each do |ns|
+        lines << indent("namespace :#{ns} do\n", depth * 2)
+        depth += 1
+      end
+
+      # Create route
+      #     get 'baz/index'
+      lines << indent(%{resources :#{file_name}s, :only => #{actions.map { |val| val.to_sym }}\n}, depth * 2)
+
+      # Create `end` ladder
+      #   end
+      # end
+      until depth.zero?
+        depth -= 1
+        lines << indent("end\n", depth * 2)
+      end
+
+      lines.join
+    end
 
 end
