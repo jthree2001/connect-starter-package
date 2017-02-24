@@ -1,6 +1,7 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   # Code is not reloaded between requests.
+  config.action_mailer.delivery_method = :aws_sdk
   config.cache_classes = true
   config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
 
