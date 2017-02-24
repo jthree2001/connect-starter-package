@@ -54,6 +54,7 @@ $text-color: #000000;
 $body-bg: #FFFFFF;
 
 $modal-backdrop-bg: #fff;
+$modal-content-bg: #fff;
 $modal-header-border-color: transparent;
 $modal-title-padding: 15px 20px;
 $modal-inner-padding: 15px 20px;;
@@ -69,6 +70,12 @@ $modal-content-fallback-border-color: 2px solid #e9ebee;
 $btn-border-radius-small: 3px;
 $btn-border-radius-medium: 3px;
 $btn-border-radius-large: 5px;
+
+
+$panel-bg: #FFF;
+$panel-default-heading-bg: #FFF;
+$panel-default-border: #FFF;
+
 
 //************ JQuery UI ************
 @import "jquery-ui";
