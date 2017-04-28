@@ -245,6 +245,7 @@ An array of hashes that contains options for each column to insert in the datata
 
 #### Partial Options
 Options can be set using the locals field in the partials render call
+
 |    Option     |                                                                 Description                                                                 | Values or Type |                         Example                         |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------- | ------------------------------------------------------- |
 | table_name    | Used to set the table's ID                                                                                                                  | String         | `{:table_name => "products"}`                           |
@@ -252,7 +253,7 @@ Options can be set using the locals field in the partials render call
 | columns       | Columns to use in the datatable                                                                                                             | array          | Reference above section on columns                      |
 | sort          | Column to sort on initially                                                                                                                 | array          | `{:sort => [[ "product_id", "asc" ]]}`                  |
 | table_filters | Filters to use in the datatable                                                                                                             | array          | Reference above section on filters                      |
-| table_views   | Views available to the datatable<br> In order to use grid the datatable class must support it. See above documenation on how to set this up | hash           | `{:table_views => {:table => true, :grid =>false}}`     |
+| table_views   | Views available to the datatable<br> In order to use grid the datatable class must support it. See above documenation on how to set this up     | hash           | `{:table_views => {:table => true, :grid =>false}}`     |
 | initial_size  | Initial page size for the table                                                                                                             | integer        | `{:initial_size => 25}`                                 |
 | table_actions | Actions to insert in the table related to the table                                                                                         | block          | Reference above section on table Actions                |
 | table_url     | URL to the controller that returns the datatable AJAX response                                                                              | url            | `{:table_url =>  products_path(format: "json") }`       |
