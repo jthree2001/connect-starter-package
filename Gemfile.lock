@@ -70,14 +70,14 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (6.7.5)
       execjs
-    aws-sdk-core (2.7.14)
+    aws-sdk-core (2.9.12)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
     aws-sdk-rails (1.0.1)
       aws-sdk-resources (~> 2)
       railties (>= 3)
-    aws-sdk-resources (2.7.14)
-      aws-sdk-core (= 2.7.14)
+    aws-sdk-resources (2.9.12)
+      aws-sdk-core (= 2.9.12)
     aws-sigv4 (1.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -123,12 +123,13 @@ GEM
       activerecord (> 3.0.0)
       delayed_job (> 2.0.3)
       sinatra (>= 1.4.4)
-    diff-lcs (1.3)
     erubis (2.7.0)
     ethon (0.10.1)
       ffi (>= 1.3.0)
     execjs (2.7.0)
     ffi (1.9.17)
+    gelf (3.0.0)
+      json
     get_process_mem (0.2.1)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -155,6 +156,10 @@ GEM
     letter_opener (1.4.1)
       launchy (~> 2.2)
     libv8 (3.16.14.17)
+    lograge (0.4.1)
+      actionpack (>= 4, < 5.1)
+      activesupport (>= 4, < 5.1)
+      railties (>= 4, < 5.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -208,19 +213,6 @@ GEM
     rake (12.0.0)
     rdoc (4.3.0)
     ref (2.0.0)
-    rspec (3.5.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.4)
-      rspec-support (~> 3.5.0)
-    rspec-expectations (3.5.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-mocks (3.5.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-support (3.5.0)
     rubyzip (1.2.1)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -279,20 +271,19 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.1.5)
-    zuora_api (1.1.4)
+    zuora_api (1.2.1)
       httparty
       nokogiri (~> 1.6.8)
       railties (>= 4.1.0, < 5.1)
       rubyzip
-    zuora_connect (1.2.2)
+    zuora_connect (1.3.8)
       activerecord-session_store
       apartment (~> 1.2.0)
       aws-sdk-rails
       bundler (~> 1.12)
       httparty (~> 0.14.0)
       railties (>= 4.1.0, < 5.1)
-      rspec (~> 3.0)
-      zuora_api (~> 1.1.0)
+      zuora_api (~> 1.2.0)
 
 PLATFORMS
   ruby
@@ -311,6 +302,7 @@ DEPENDENCIES
   delayed_job
   delayed_job_active_record
   delayed_job_web
+  gelf
   groupdate
   httparty
   jbuilder (~> 2.0)
@@ -319,6 +311,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   letter_opener
+  lograge
   nokogiri
   pg
   rails (= 5.0.0)
@@ -337,8 +330,8 @@ DEPENDENCIES
   unicorn-worker-killer
   web-console (~> 2.0)
   will_paginate (~> 3.1.0)
-  zuora_api (~> 1.1.0)
-  zuora_connect (~> 1.2.0)
+  zuora_api (~> 1.2.1)
+  zuora_connect (~> 1.3.7)
 
 RUBY VERSION
    ruby 2.3.1p112

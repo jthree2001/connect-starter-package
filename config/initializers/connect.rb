@@ -1,3 +1,20 @@
+GELF::Logger.send :include, ActiveRecord::SessionStore::Extension::LoggerSilencer
+#If using delayedjob
+#Delayed::Backend::ActiveRecord::Job.logger.level = 1
+#
+Rails.application.configure do
+ config.lograge.enabled = true
+ config.lograge.formatter = Lograge::Formatters::KeyValue.new
+ config.lograge.custom_options = lambda do |event|
+   exceptions = %w(controller action format id)
+   {
+     params: event.payload[:params].except(*exceptions),
+     exception: event.payload[:exception],
+     exception_object: event.payload[:exception_object]
+   }
+ end
+end
+
 ZuoraConnect.configure do |config|
   config.private_key = Rails.application.secrets.connect['key']
   config.delayed_job = true

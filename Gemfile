@@ -15,8 +15,15 @@ gem 'chartkick'
 
 gem "select2-rails"
 gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
-gem 'zuora_api', '~> 1.1.0'
-gem 'zuora_connect', '~> 1.2.0'
+gem 'zuora_api', '~> 1.2.1'
+gem 'zuora_connect', '~> 1.3.7'
+
+
+#Logging
+
+gem 'gelf'
+gem 'lograge'
+
 
 gem "delayed_job"
 gem "delayed_job_active_record"
@@ -79,4 +86,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-

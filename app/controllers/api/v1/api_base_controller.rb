@@ -2,6 +2,8 @@ class Api::V1::APIBaseController < ApplicationController
   around_filter :catch_exceptions
   before_filter :authenticate_app_api_request
   skip_before_filter :verify_authenticity_token
+  skip_before_filter :authenticate_connect_app_request
+  skip_after_filter :persist_connect_app_session
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
 
