@@ -16,8 +16,33 @@ gem "delayed_job"
 gem "delayed_job_active_record"
 gem "daemons"
 gem "lograge"
-#Pulled out of web because needed for asset precompile during build phase
+
+#Front End Gems
+gem 'groupdate'
+gem 'chartkick'
+gem "select2-rails"
+gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
 gem "delayed_job_web"
+gem 'sinatra', '2.0.0.beta2'
+# Use SCSS for stylesheets
+gem 'sass-rails', '~> 5.0'
+gem 'bootstrap-sass'
+gem 'bootstrap-toggle-rails'
+# Use Uglifier as compressor for JavaScript assets
+gem 'uglifier', '>= 1.3.0'
+# Use CoffeeScript for .coffee assets and views
+gem 'coffee-rails', '~> 4.1.0'
+# See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'therubyracer', platforms: :ruby
+# Use jquery as the JavaScript library
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'jquery-migrate-rails'
+gem 'underscore-rails'
+# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.0'
+gem 'rubyzip'
+gem 'remotipart', :git => 'https://github.com/JangoSteve/remotipart.git'
 
 group :production do
   gem 'unicorn'
@@ -32,32 +57,4 @@ group :development do
   gem 'byebug'
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', '~> 0.4.0', group: :doc
-end
-
-#Front End Gems
-group :web do
-  gem 'groupdate'
-  gem 'chartkick'
-  gem "select2-rails"
-  gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
-  gem 'sinatra', '2.0.0.beta2'
-  # Use SCSS for stylesheets
-  gem 'sass-rails', '~> 5.0'
-  gem 'bootstrap-sass'
-  gem 'bootstrap-toggle-rails'
-  # Use Uglifier as compressor for JavaScript assets
-  gem 'uglifier', '>= 1.3.0'
-  # Use CoffeeScript for .coffee assets and views
-  gem 'coffee-rails', '~> 4.1.0'
-  # See https://github.com/rails/execjs#readme for more supported runtimes
-  gem 'therubyracer', platforms: :ruby
-  # Use jquery as the JavaScript library
-  gem 'jquery-rails'
-  gem 'jquery-ui-rails'
-  gem 'jquery-migrate-rails'
-  gem 'underscore-rails'
-  # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-  gem 'jbuilder', '~> 2.0'
-  gem 'rubyzip'
-  gem 'remotipart', :git => 'https://github.com/JangoSteve/remotipart.git'
 end
