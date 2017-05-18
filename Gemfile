@@ -15,7 +15,7 @@ gem 'zuora_connect', '~> 1.4.4'
 gem "delayed_job"
 gem "delayed_job_active_record"
 gem "daemons"
-gem 'lograge'
+gem "lograge"
 
 group :production do
   gem 'unicorn'
