@@ -2,6 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
+Bundler.require(*Rails.groups)
+
 if ENV.has_key?("PROCESS_TYPE")
   # If we do, assuming its a comma seperated list
   ENV["PROCESS_TYPE"].split(",").each { |type|
@@ -11,9 +15,17 @@ if ENV.has_key?("PROCESS_TYPE")
   }
 end
 
+if ENV.has_key?("PROCESS_TYPE")
+    # If we do, assuming its a comma seperated list
+    ENV["PROCESS_TYPE"].split(",").each { |type|
+        # Require the current process type, and
+        # current process type and environment joined by an underscore
+        Bundler.require(type, "#{type}_#{Rails.env}")
+    }
+end
+
 module WorkflowEngine
   class Application < Rails::Application
-    require "lograge"
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
