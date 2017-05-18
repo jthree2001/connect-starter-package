@@ -11,8 +11,9 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: starter_package_test
-  pool: 5
+  database: test_db
+  host: postgres
+  pool: 30
   username: postgres
   password: root
 
