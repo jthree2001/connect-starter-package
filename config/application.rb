@@ -15,15 +15,6 @@ if ENV.has_key?("PROCESS_TYPE")
   }
 end
 
-if ENV.has_key?("PROCESS_TYPE")
-    # If we do, assuming its a comma seperated list
-    ENV["PROCESS_TYPE"].split(",").each { |type|
-        # Require the current process type, and
-        # current process type and environment joined by an underscore
-        Bundler.require(type, "#{type}_#{Rails.env}")
-    }
-end
-
 module WorkflowEngine
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

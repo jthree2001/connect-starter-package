@@ -16,6 +16,8 @@ gem "delayed_job"
 gem "delayed_job_active_record"
 gem "daemons"
 gem "lograge"
+#Pulled out of web because needed for asset precompile during build phase
+gem "delayed_job_web"
 
 group :production do
   gem 'unicorn'
@@ -38,7 +40,6 @@ group :web do
   gem 'chartkick'
   gem "select2-rails"
   gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
-  gem "delayed_job_web"
   gem 'sinatra', '2.0.0.beta2'
   # Use SCSS for stylesheets
   gem 'sass-rails', '~> 5.0'
