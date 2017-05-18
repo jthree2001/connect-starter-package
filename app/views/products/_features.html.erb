@@ -1,0 +1,268 @@
+<h3>Login Information</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Code</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+@appinstance.logins
+@appinstance.logins.class
+@appinstance.logins.keys
+# You can also reference the login directly based on the login key name
+@appinstance.target_login
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Output</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+<%= @appinstance.logins %>
+<%= @appinstance.logins.class %>
+<%= @appinstance.logins.keys %>
+# You can also reference the login directly based on the login key name
+<%= @appinstance.target_login %>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Options</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Code</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+@appinstance.options
+# You can reference the option by the config name
+@appinstance.options["name"]
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Output</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+<%= @appinstance.options %>
+# You can reference the option by the config name
+<%= @appinstance.options["name"] %>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Mode</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Code</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+# The mode is passed in from Connect and can be used to determine what features of this application should be used
+@appinstance.mode
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Output</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+#The mode is passed in from Connect and can be used to determine what features of this application should be used
+<%= @appinstance.mode %>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>User Locale Information</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Code</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+# User based information can be pulled from the current session
+session["#{@appinstance.id}::user::timezone"]
+session["#{@appinstance.id}::user::locale"]
+# If not set this information defaults to the default set in the config file for the gem
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Output</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+# User based information can be pulled from the current session
+<%= session["#{@appinstance.id}::user::timezone"] %>
+<%= session["#{@appinstance.id}::user::locale"] %>
+# If not set this information defaults to the default set in the config file for the gem
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3>Creating Workers</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Code</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+# Workers are added to the lib/workers/ folder and has code similiar to the following three examples:
+
+#lib/workers/one_app_instance_worker.rb
+class OneAppInstanceWorker
+  attr_accessor :schema
+  def initialize(instance_id)
+    @instance_id = instance_id
+    @schema = ActiveRecord::Base.connection.schema_search_path
+  end
+  def perform()
+    instance = ZuoraConnect::AppInstance.find(@instance_id)
+    instance.new_session()
+    instance.url
+    #logic
+  end
+  def before(job)
+    ActiveRecord::Base.connection.schema_search_path = @schema
+  end
+  def after(job)
+    ActiveRecord::Base.connection.schema_search_path = 'public'
+  end
+end
+
+#lib/workers/all_instances_worker.rb
+class AllInstancesWorker
+  attr_accessor :schema
+  def initialize()
+    @schema = ActiveRecord::Base.connection.schema_search_path
+  end
+  def perform()
+    ZuoraConnect::AppInstance.all.each do |instance|
+      instance.new_session()
+      instance.url
+      # Logic
+    end
+  end
+  def before(job)
+    ActiveRecord::Base.connection.schema_search_path = @schema
+  end
+  def after(job)
+    ActiveRecord::Base.connection.schema_search_path = 'public'
+  end
+end
+
+#lib/workers/multiple_instances_worker.rb
+class MultipleInstancesWorker
+  attr_accessor :schema
+  def initialize(instance_ids)
+    @instance_ids = instance_ids #instances_ids is an array of ids
+    @schema = ActiveRecord::Base.connection.schema_search_path
+  end
+  def perform()
+    ZuoraConnect::AppInstance.where(:id => instance_ids).each do |instance|
+      instance.new_session()
+      instance.url
+      # Logic
+    end
+  end
+  def before(job)
+    ActiveRecord::Base.connection.schema_search_path = @schema
+  end
+  def after(job)
+    ActiveRecord::Base.connection.schema_search_path = 'public'
+  end
+end
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Execution</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+#Workers are started through the terminal by running the following command
+bin/delayed_job start
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h3>Queuing Workers</h3>
+<hr>
+<div class="row">
+  <div class="left-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Code</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+# A job can be queued by executing code similiar to the following:
+Delayed::Job.enqueue(Catalog.new(@appinstance.id))
+# The job is then thrown onto a queue and picked up a by worker for later processing
+# This can be checked by referening the delayed job admin section
+        </pre>
+      </div>
+    </div>
+  </div>
+  <div class="right-panel col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><strong>Output</strong></h3>
+      </div>
+      <div class="panel-body">
+        <pre class="prettyprint">
+# A worker can be queued by executing code similiar to the following:
+<%= Delayed::Job.enqueue(Catalog.new(@appinstance.id)) %>
+# The job is then thrown onto a queue and picked up by a worker for later processing
+# This can be checked by referening the delayed job admin section
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
