@@ -11,7 +11,7 @@ gem 'httparty'
 gem 'typhoeus'
 gem 'will_paginate', '~> 3.1.0'
 gem 'zuora_api', '~> 1.3.3'
-gem 'zuora_connect', '~> 1.4.4'
+gem 'zuora_connect', '~> 1.4.6'
 gem "delayed_job"
 gem "delayed_job_active_record"
 gem "daemons"

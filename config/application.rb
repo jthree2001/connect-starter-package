@@ -32,21 +32,6 @@ module WorkflowEngine
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
     config.active_job.queue_adapter = :delayed_job
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = ::Logger::Formatter.new
-    config.logger = ActiveSupport::TaggedLogging.new(logger)
-    config.lograge.enabled = true
-
-    config.lograge.formatter = Lograge::Formatters::KeyValue.new
-    config.lograge.custom_options = lambda do |event|
-      exceptions = %w(controller action format id)
-      {
-        params: event.payload[:params].except(*exceptions),
-        exception: event.payload[:exception],
-        exception_object: event.payload[:exception_object]
-      }
-    end
-
     config.generators do |g|
       g.jbuilder          false
       g.templates.unshift File::expand_path("../templates", File.dirname(__FILE__))
