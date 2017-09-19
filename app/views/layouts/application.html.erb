@@ -91,5 +91,8 @@
         if ('<%= error %>' != ""){noty({text: "<%= error %>", layout: "topRight",type: "error", animateOpen: {opacity: "show"}, closeWith: ["hover"]});}
       });
     </script>
+    <% if is_app_admin? %>
+      <font size="-5">Zuora Connect Gem Version: <%= Gem.loaded_specs["zuora_connect"].version %>, Git commit id: <%= %x{git rev-parse HEAD}.strip %> </font>
+    <% end %>
   </body>
 </html>
