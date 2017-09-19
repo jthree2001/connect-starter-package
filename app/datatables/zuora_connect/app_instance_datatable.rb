@@ -31,7 +31,10 @@ private
 				"zuora_connect/app_instances__updated_at" => zuora_connect_app_instance.updated_at,
 				"zuora_connect/app_instances__access_token" => zuora_connect_app_instance.access_token,
 				"zuora_connect/app_instances__refresh_token" => zuora_connect_app_instance.refresh_token,
+				"zuora_connect/app_instances__oauth_expires_at" => zuora_connect_app_instance.oauth_expires_at,
 				"zuora_connect/app_instances__token" => zuora_connect_app_instance.token,
+				"zuora_connect/app_instances__api_token" => zuora_connect_app_instance.api_token,
+				"zuora_connect/app_instances__catalog_updated_at" => zuora_connect_app_instance.catalog_updated_at,
         zuora_connect_app_instances_actions: actions(zuora_connect_app_instance),
       }
     end

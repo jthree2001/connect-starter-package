@@ -1,9 +1,0 @@
-== README
-
-This Starter package assumes that a postgres database is configured
-
-Insect the config/database.yml file for more information
-
-Insert your Zuora credentials into the secrets file
-Run rails s
-Navigate to localhost:3000

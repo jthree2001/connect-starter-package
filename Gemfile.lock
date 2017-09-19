@@ -49,12 +49,12 @@ GEM
       activemodel (= 5.0.0)
       activesupport (= 5.0.0)
       arel (~> 7.0)
-    activerecord-session_store (1.0.0)
-      actionpack (>= 4.0, < 5.1)
-      activerecord (>= 4.0, < 5.1)
+    activerecord-session_store (1.1.0)
+      actionpack (>= 4.0, < 5.2)
+      activerecord (>= 4.0, < 5.2)
       multi_json (~> 1.11, >= 1.11.2)
       rack (>= 1.5.2, < 3)
-      railties (>= 4.0, < 5.1)
+      railties (>= 4.0, < 5.2)
     activesupport (5.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -62,22 +62,20 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
-    airbrussh (1.1.2)
-      sshkit (>= 1.6.1, != 1.7.0)
     apartment (1.2.0)
       activerecord (>= 3.1.2, < 6.0)
       rack (>= 1.3.6)
     arel (7.1.4)
     autoprefixer-rails (6.7.5)
       execjs
-    aws-sdk-core (2.7.14)
+    aws-sdk-core (2.9.20)
       aws-sigv4 (~> 1.0)
       jmespath (~> 1.0)
     aws-sdk-rails (1.0.1)
       aws-sdk-resources (~> 2)
       railties (>= 3)
-    aws-sdk-resources (2.7.14)
-      aws-sdk-core (= 2.7.14)
+    aws-sdk-resources (2.9.20)
+      aws-sdk-core (= 2.9.20)
     aws-sigv4 (1.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -87,22 +85,6 @@ GEM
     bootstrap-toggle-rails (2.2.1.0)
     builder (3.2.3)
     byebug (9.0.6)
-    capistrano (3.7.2)
-      airbrussh (>= 1.0.0)
-      capistrano-harrow
-      i18n
-      rake (>= 10.0.0)
-      sshkit (>= 1.9.0)
-    capistrano-bundler (1.2.0)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2)
-    capistrano-harrow (0.5.3)
-    capistrano-rails (1.2.2)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    capistrano-rvm (0.1.2)
-      capistrano (~> 3.0)
-      sshkit (~> 1.2)
     chartkick (2.2.3)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
@@ -123,7 +105,6 @@ GEM
       activerecord (> 3.0.0)
       delayed_job (> 2.0.3)
       sinatra (>= 1.4.4)
-    diff-lcs (1.3)
     erubis (2.7.0)
     ethon (0.10.1)
       ffi (>= 1.3.0)
@@ -155,6 +136,10 @@ GEM
     letter_opener (1.4.1)
       launchy (~> 2.2)
     libv8 (3.16.14.17)
+    lograge (0.5.1)
+      actionpack (>= 4, < 5.2)
+      activesupport (>= 4, < 5.2)
+      railties (>= 4, < 5.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -168,9 +153,6 @@ GEM
     multi_json (1.12.1)
     multi_xml (0.6.0)
     mustermann (1.0.0.beta2)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (4.1.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -208,19 +190,6 @@ GEM
     rake (12.0.0)
     rdoc (4.3.0)
     ref (2.0.0)
-    rspec (3.5.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-    rspec-core (3.5.4)
-      rspec-support (~> 3.5.0)
-    rspec-expectations (3.5.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-mocks (3.5.0)
-      diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-support (3.5.0)
     rubyzip (1.2.1)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -248,9 +217,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sshkit (1.12.0)
-      net-scp (>= 1.1.2)
-      net-ssh (>= 2.8.0)
     therubyracer (0.12.3)
       libv8 (~> 3.16.14.15)
       ref
@@ -279,20 +245,20 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
     will_paginate (3.1.5)
-    zuora_api (1.1.4)
+    zuora_api (1.3.3)
       httparty
       nokogiri (~> 1.6.8)
       railties (>= 4.1.0, < 5.1)
       rubyzip
-    zuora_connect (1.2.2)
+    zuora_connect (1.4.7)
       activerecord-session_store
       apartment (~> 1.2.0)
       aws-sdk-rails
       bundler (~> 1.12)
       httparty (~> 0.14.0)
+      lograge
       railties (>= 4.1.0, < 5.1)
-      rspec (~> 3.0)
-      zuora_api (~> 1.1.0)
+      zuora_api (~> 1.3.0)
 
 PLATFORMS
   ruby
@@ -301,10 +267,6 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-toggle-rails
   byebug
-  capistrano
-  capistrano-bundler
-  capistrano-rails
-  capistrano-rvm
   chartkick
   coffee-rails (~> 4.1.0)
   daemons
@@ -337,11 +299,11 @@ DEPENDENCIES
   unicorn-worker-killer
   web-console (~> 2.0)
   will_paginate (~> 3.1.0)
-  zuora_api (~> 1.1.0)
-  zuora_connect (~> 1.2.0)
+  zuora_api (~> 1.3.3)
+  zuora_connect (~> 1.4.7)
 
 RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.7
+   1.14.6
