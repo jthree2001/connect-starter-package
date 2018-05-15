@@ -63,7 +63,7 @@ class Api::V1::APIBaseController < ApplicationController
     puts ex5.backtrace
     error = {:code => 500, :message => "Internal server error"}
     respond_to do |format|
-      format.json { render json: {"success" => false, "error" => error}, status: :bad_request }
+      format.json { render json: {"success" => false, "error" => error}, status: :internal_server_error }
     end
   end
 
