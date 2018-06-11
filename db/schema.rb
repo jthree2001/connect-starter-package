@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20180517160611) do
   end
 
   create_table "zuora_connect_app_instances", force: :cascade do |t|
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "access_token"
     t.string   "refresh_token"
     t.string   "token"
