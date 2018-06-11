@@ -84,7 +84,7 @@
             <i class="fa fa-refresh"></i>
           </label>
         </div>
-        <%= select_tag(:table_size, options_for_select([['10','10'],['25','25'],['50','50'],['100','100']], initial_size.to_s ),  options = { :class => "btn btn-default", :style => '-webkit-appearance: none;-moz-appearance: none;height: 30px;'})%>
+        <%= select_tag(:table_size, options_for_select([['10','10'],['25','25'],['50','50'],['100','100']], initial_size.to_s ),  options = { :class => "btn btn-default", :style => '-webkit-appearance: none;-moz-appearance: none;'})%>
       </div>
     </div>
     <div class="col-lg-3 col-md-2 col-sm-2">
@@ -92,7 +92,7 @@
     </div>
   </div>
 
-  <table id='<%= "#{table_name}" %>' data-source="<%= table_url %>" class="table bootstrap-datatable datatable hidden" style="width: 100% !important;"></table>
+  <table id='<%= "#{table_name}" %>' data-source="<%= table_url %>" class="table table-striped table-bordered bootstrap-datatable datatable hidden" style="width: 100% !important;"></table>
 </div>
 
 <% content_for :scripts do %>

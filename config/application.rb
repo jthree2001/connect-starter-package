@@ -1,11 +1,11 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
+    
 if ENV.has_key?("PROCESS_TYPE")
   # If we do, assuming its a comma seperated list
   ENV["PROCESS_TYPE"].split(",").each { |type|
@@ -15,8 +15,14 @@ if ENV.has_key?("PROCESS_TYPE")
   }
 end
 
-module WorkflowEngine
+module EventsUI
   class Application < Rails::Application
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -31,10 +37,11 @@ module WorkflowEngine
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.active_job.queue_adapter = :delayed_job
     config.generators do |g|
       g.jbuilder          false
       g.templates.unshift File::expand_path("../templates", File.dirname(__FILE__))
     end
   end
 end
+
+

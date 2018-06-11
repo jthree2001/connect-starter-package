@@ -5,24 +5,26 @@ ruby "2.3.1"
 
 #Common Gems
 gem 'rails', '5.0.0'
-gem 'pg'
+gem 'pg', '~> 0.21.0'
 gem 'nokogiri'
 gem 'httparty'
-gem 'typhoeus'
-gem 'will_paginate', '~> 3.1.0'
-gem 'zuora_api', '~> 1.3.3'
-gem 'zuora_connect', '~> 1.4.7'
-gem "delayed_job"
-gem "delayed_job_active_record"
-gem "daemons"
+gem 'will_paginate'
+gem 'zuora_api'
+gem 'zuora_connect'
+
+# gem 'zuora_api_oauth_alpha', '2'
+# gem 'zuora_connect_oauth_alpha', '2'
 
 #Front End Gems
-gem 'groupdate'
-gem 'chartkick'
 gem "select2-rails"
 gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
-gem "delayed_job_web"
-gem 'sinatra', '2.0.0.beta2'
+gem 'simple_form'
+gem 'peek'
+gem 'peek-git'
+gem 'peek-pg'
+gem 'peek-performance_bar'
+gem 'peek-redis'
+gem 'peek-resque'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass'
@@ -31,8 +33,6 @@ gem 'bootstrap-toggle-rails'
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'therubyracer', platforms: :ruby
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -40,8 +40,21 @@ gem 'jquery-migrate-rails'
 gem 'underscore-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
-gem 'rubyzip'
-gem 'remotipart', :git => 'https://github.com/JangoSteve/remotipart.git'
+
+# Rescue workers and delayed worker response
+gem 'redis', '3.3.5'
+gem 'redis-session-store'
+gem 'redis-browser'
+gem 'resque', :require => 'resque/server'
+gem 'resque-scheduler', '4.3.0'
+gem 'resque-pool'
+gem 'resque-web', require: 'resque_web'
+gem 'listen'
+gem 'turbolinks'
+gem 'awesome_print'
+
+
+
 
 group :production do
   gem 'unicorn'
@@ -49,6 +62,7 @@ group :production do
 end
 
 group :development do
+  gem 'derailed'
   gem 'web-console', '~> 2.0'
   gem "letter_opener"
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

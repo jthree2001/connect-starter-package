@@ -1,1 +1,2 @@
-Rails.application.config.session_store :active_record_store, :key => 'zuora_connect_session_store'
+Rails.application.config.session_store :redis_session_store, key: 'events_ui_session', serializer: :json,
+                                                            redis: { expire_after: 240.minutes, key_prefix: 'EventsUI:session:', url: Rails.application.secrets.redis }
