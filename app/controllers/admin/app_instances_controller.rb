@@ -1,5 +1,5 @@
 class Admin::AppInstancesController < Admin::ApplicationController
-  before_action :set_app_instance, only: [:edit, :update, :message]
+  before_action :set_app_instance, only: [:show, :edit, :update, :message]
 
   def index
     respond_to do |format|
@@ -10,7 +10,6 @@ class Admin::AppInstancesController < Admin::ApplicationController
   end
 
   def show
-    set_app_instance
     switch_instances
   end
 

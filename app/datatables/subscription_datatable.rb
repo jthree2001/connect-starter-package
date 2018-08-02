@@ -4,7 +4,7 @@ class SubscriptionDatatable
   def initialize(view)
     @view = view
     @total_subscriptions = Subscription.count(:all)
-    @subscriptions = Subscription.select(select_string).where(search_string, search: "%#{params[:sSearch].to_s.downcase}%")
+    @subscriptions = Subscription.select(select_string).where(search_string, search: "%#{params[:sSearch].to_s.downcase}%").order("#{sort_column} #{sort_direction}")
     @filtered_total = @subscriptions.size
     @subscriptions = @subscriptions.page(page).per_page(per_page)
   end
@@ -14,7 +14,7 @@ class SubscriptionDatatable
       sEcho: params[:sEcho].to_i,
       iTotalDisplayRecords: @filtered_total,
       aaData: data,
-      iTotalRecords: @total_zuora_connect_app_instances,
+      iTotalRecords: @total_subscriptions,
     }
   end
 
@@ -25,16 +25,18 @@ private
         DT_RowId: subscription.id.to_s,
         DT_RowClass: nil,
         DT_RowAttr: { },
-        "subscriptions__display_id" => subscription.id,
+        "subscriptions__id" => subscription.id,
         "subscriptions__name" => subscription.name,
         "subscriptions__zuora_id" => subscription.zuora_id,
+        "subscriptions__created_at" => subscription.created_at,
+        "subscriptions__updated_at" => subscription.updated_at,
         subscriptions__actions: actions(subscription)
       }
     end
   end
 
   def actions(subscription)
-    render(:partial=>"subscriptions/actions.html.erb", locals: { subscription: subscription} , :formats => [:html]) if params[:table_view_mode] == 'table'
+    render(:partial=>"subscriptions/actions.html.erb", locals: { subscription: subscription, view_mode: 'params[:table_view_mode]'} , :formats => [:html]) if params[:table_view_mode] == 'table'
   end
 
   def display_time(time)
@@ -56,7 +58,7 @@ private
       if !field.blank? && !object.blank?
         map = {"Subscription" => Subscription}
         field_type = map[object.classify].column_for_attribute(field).type
-        return [:string, :text].include?(field_type) ? "lower(#{col.gsub("/", "_")})" : col
+        return [:string, :text].include?(field_type) ? "lower(#{col.gsub("/", "_")})" : "#{col.gsub("/", "_")}"
       else
         return col
       end

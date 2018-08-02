@@ -4,7 +4,7 @@ class ZuoraConnect::AppInstanceDatatable
   def initialize(view)
     @view = view
     @total_zuora_connect_app_instances = ZuoraConnect::AppInstance.count(:all)
-    @zuora_connect_app_instances = ZuoraConnect::AppInstance.select(select_string).where(search_string, search: "%#{params[:sSearch].to_s.downcase}%")
+    @zuora_connect_app_instances = ZuoraConnect::AppInstance.select(select_string).where(search_string, search: "%#{params[:sSearch].to_s.downcase}%").order("#{sort_column} #{sort_direction}")
     @filtered_total = @zuora_connect_app_instances.size
     @zuora_connect_app_instances = @zuora_connect_app_instances.page(page).per_page(per_page)
   end
@@ -26,16 +26,16 @@ private
         DT_RowClass: nil,
         DT_RowAttr: { },
         "zuora_connect/app_instances__id" => link_to(zuora_connect_app_instance.id, "/admin/app_instances/#{zuora_connect_app_instance.id}"),
-                "zuora_connect/app_instances__created_at" => zuora_connect_app_instance.created_at,
-                "zuora_connect/app_instances__updated_at" => zuora_connect_app_instance.updated_at,
-                "zuora_connect/app_instances__access_token" => zuora_connect_app_instance.access_token,
-                "zuora_connect/app_instances__refresh_token" => zuora_connect_app_instance.refresh_token,
-                "zuora_connect/app_instances__oauth_expires_at" => zuora_connect_app_instance.oauth_expires_at,
-                "zuora_connect/app_instances__token" => zuora_connect_app_instance.token,
-                "zuora_connect/app_instances__api_token" => zuora_connect_app_instance.api_token,
-                "zuora_connect/app_instances__catalog_update_attempt_at" => zuora_connect_app_instance.catalog_update_attempt_at,
-                "zuora_connect/app_instances__catalog_updated_at" => zuora_connect_app_instance.catalog_updated_at,
-        zuora_connect_app_instances_actions: actions(zuora_connect_app_instance),
+        "zuora_connect/app_instances__created_at" => zuora_connect_app_instance.created_at,
+        "zuora_connect/app_instances__updated_at" => zuora_connect_app_instance.updated_at,
+        "zuora_connect/app_instances__access_token" => zuora_connect_app_instance.access_token,
+        "zuora_connect/app_instances__refresh_token" => zuora_connect_app_instance.refresh_token,
+        "zuora_connect/app_instances__oauth_expires_at" => zuora_connect_app_instance.oauth_expires_at,
+        "zuora_connect/app_instances__token" => zuora_connect_app_instance.token,
+        "zuora_connect/app_instances__api_token" => zuora_connect_app_instance.api_token,
+        "zuora_connect/app_instances__catalog_update_attempt_at" => zuora_connect_app_instance.catalog_update_attempt_at,
+        "zuora_connect/app_instances__catalog_updated_at" => zuora_connect_app_instance.catalog_updated_at,
+        zuora_connect_app_instances__actions: actions(zuora_connect_app_instance),
       }
     end
   end
@@ -63,7 +63,7 @@ private
       if !field.blank? && !object.blank?
         map = {"ZuoraConnect::AppInstance" => ZuoraConnect::AppInstance}
         field_type = map[object.classify].column_for_attribute(field).type
-        return [:string, :text].include?(field_type) ? "lower(#{col.gsub("/", "_")})" : col
+        return [:string, :text].include?(field_type) ? "lower(#{col.gsub("/", "_")})" : "#{col.gsub("/", "_")}"
       else
         return col
       end
