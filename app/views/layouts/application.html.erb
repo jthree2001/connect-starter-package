@@ -59,13 +59,21 @@
         <%= yield :breadcrumbs %>
       </div>
       <% if is_app_admin? %>
-        <div id='admin_button' class="pull-right" style="margin: -25px 18px 0px 0px;">
+        <div id='admin_button' class="pull-right" style="margin: -27px 18px 0px 0px;">
+          <font id='peekbar' size="-5" style="margin-right: 5px;">
+            <%= render 'peek/bar' %> <%= yield :peekbar %>
+            <b>Zuora Connect Gem Version:</b>
+            <%= Gem.loaded_specs["zuora_connect"].version %>
+            <b style="margin-left: 5px;">App Instance:</b>
+            <%= @appinstance.id %>
+          </font>
           <div class="btn-group dropdown">
             <a class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span>
             </a>
             <ul class="dropdown-menu" style="left: -64px;min-width: 120px;">
-              <li><%= link_to 'App Instances', admin_app_instances_path, :remote => true %></li>
-              <li><%= link_to 'Delayed Job', admin_delayedjob_path, :remote => true %></li>
+              <li><a href="/admin/resque_web">Resque Web</a></li>
+              <li><a href="/admin/redis-browser" target="_blank">Redis Web</a></li>
+              <li><a href="/admin/app_instances">App Instances</a></li>
             </ul>
           </div>
         </div>
@@ -91,8 +99,5 @@
         if ('<%= error %>' != ""){noty({text: "<%= error %>", layout: "topRight",type: "error", animateOpen: {opacity: "show"}, closeWith: ["hover"]});}
       });
     </script>
-    <% if is_app_admin? %>
-      <font size="-5">Zuora Connect Gem Version: <%= Gem.loaded_specs["zuora_connect"].version %>, Git commit id: <%= %x{git rev-parse HEAD}.strip %> </font>
-    <% end %>
   </body>
 </html>

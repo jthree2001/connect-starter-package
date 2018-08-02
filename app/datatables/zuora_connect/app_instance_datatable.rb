@@ -2,7 +2,6 @@ class ZuoraConnect::AppInstanceDatatable
   delegate :controller, :url_for, :render, :params, :image_tag, :h, :link_to, :api_call_path, :number_to_currency, to: :@view
 
   def initialize(view)
-    puts "step1"
     @view = view
     @total_zuora_connect_app_instances = ZuoraConnect::AppInstance.count(:all)
     @zuora_connect_app_instances = ZuoraConnect::AppInstance.select(select_string).where(search_string, search: "%#{params[:sSearch].to_s.downcase}%")
@@ -26,15 +25,16 @@ private
         DT_RowId: zuora_connect_app_instance.id.to_s,
         DT_RowClass: nil,
         DT_RowAttr: { },
-        "zuora_connect/app_instances__id" => zuora_connect_app_instance.id,
-				"zuora_connect/app_instances__created_at" => zuora_connect_app_instance.created_at,
-				"zuora_connect/app_instances__updated_at" => zuora_connect_app_instance.updated_at,
-				"zuora_connect/app_instances__access_token" => zuora_connect_app_instance.access_token,
-				"zuora_connect/app_instances__refresh_token" => zuora_connect_app_instance.refresh_token,
-				"zuora_connect/app_instances__oauth_expires_at" => zuora_connect_app_instance.oauth_expires_at,
-				"zuora_connect/app_instances__token" => zuora_connect_app_instance.token,
-				"zuora_connect/app_instances__api_token" => zuora_connect_app_instance.api_token,
-				"zuora_connect/app_instances__catalog_updated_at" => zuora_connect_app_instance.catalog_updated_at,
+        "zuora_connect/app_instances__id" => link_to(zuora_connect_app_instance.id, "/admin/app_instances/#{zuora_connect_app_instance.id}"),
+                "zuora_connect/app_instances__created_at" => zuora_connect_app_instance.created_at,
+                "zuora_connect/app_instances__updated_at" => zuora_connect_app_instance.updated_at,
+                "zuora_connect/app_instances__access_token" => zuora_connect_app_instance.access_token,
+                "zuora_connect/app_instances__refresh_token" => zuora_connect_app_instance.refresh_token,
+                "zuora_connect/app_instances__oauth_expires_at" => zuora_connect_app_instance.oauth_expires_at,
+                "zuora_connect/app_instances__token" => zuora_connect_app_instance.token,
+                "zuora_connect/app_instances__api_token" => zuora_connect_app_instance.api_token,
+                "zuora_connect/app_instances__catalog_update_attempt_at" => zuora_connect_app_instance.catalog_update_attempt_at,
+                "zuora_connect/app_instances__catalog_updated_at" => zuora_connect_app_instance.catalog_updated_at,
         zuora_connect_app_instances_actions: actions(zuora_connect_app_instance),
       }
     end

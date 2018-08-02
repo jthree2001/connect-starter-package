@@ -11,7 +11,6 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
-//= require jquery.remotipart
 //= require jquery-migrate-min
 //= require jquery_ujs
 //= require jquery-ui
@@ -37,28 +36,14 @@
 //= require dataTables/extras/dataTables.colReorder
 //= require dataTables/extras/dataTables.select
 //
-//************ Elfinder ************
-//= require js/elfinder.min.js
-//= require js/proxy/elFinderSupportVer1.js
-//
-//************ fuelUxWizard ************
-//= require js/fuelUxWizard.min
-//
 //************ Select2 ************
 //= require select2-full
 //= require select2_locale_en
 //= require select2_locale_fr
 //= require select2_locale_zh-CN
 //
-//************ SummerNote ************
-//= require js/summernote.js
-//
 //************ UnderScore ************
 //= require underscore
-//
-//************ Chart kick ************
-//= require chartkick
-//= require js/highcharts
 //
 //***********ContextMenu********
 //= require js/jquery.contextMenu.min.js

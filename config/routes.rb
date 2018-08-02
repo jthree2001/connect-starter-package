@@ -1,18 +1,16 @@
 Rails.application.routes.draw do
-  root :to => "products#index"
-  resources :products
+  mount Peek::Railtie => '/peek'
+  resources :subscriptions
+
   app_admin = lambda { |request| request.session["#{request.session['appInstance']}::admin"]}
-  constraints app_admin do
-    namespace :admin do
-      get :delayedjob, to: 'application#delayedjob'
-      match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
-      resources :app_instances, :only => [:index]
-    end
+  namespace :admin do
+    mount RedisBrowser::Web => '/redis-browser'
+    mount ResqueWeb::Engine => "/resque_web"
+    get :resque, to: 'application#resque'
+    resources :app_instances
   end
-  namespace :api, defaults: {format: 'json'} do
-    namespace :v1 do
-      resources :products, :only => [:index, :show]
-    end
-  end
-  match '*path', via: :all, to: 'products#index'
+
+  root :to => "subscriptions#index"
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -109,3 +109,57 @@ $panel-default-border: #FFF;
 //***** Custom configs *********
 @import "custom.scss";
 @import "zuora/*";
+
+//************ Peek ************
+@import "peek";
+@import "peek/views/performance_bar";
+@import "peek/vendor/tipsy";
+
+/*************** Override Peek Elements ********************/
+#peek {
+  float: left;
+  text-shadow: none;
+
+  &.production {
+    background-color: transparent;
+  }
+
+  &.staging {
+    background-color: transparent;
+  }
+
+  &.development {
+    background-color: transparent;
+  }
+
+  .wrapper {
+    width: auto;
+    margin-right: 15px;
+    margin-top: -8px;
+  }
+
+  // UI Elements
+  .bucket {
+
+    .hidden {
+      display: none;
+    }
+
+    &:hover .hidden {
+      display: inline;
+    }
+  }
+
+  strong {
+    color: #1A232B;
+  }
+
+  .view {
+    margin-right: 15px;
+    float: left;
+  }
+}
+
+.performance-bar {
+  width: 75px;
+}

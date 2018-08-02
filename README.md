@@ -13,11 +13,14 @@
  - Log into psql and change the postgres users password `psql -U postgres`
  - Change the postgres password `ALTER USER postgres WITH PASSWORD 'root';`
  - Exit out of postgres `\q`
+- Install [Redis](https://redis.io/)
+  - `brew install redis`
+  - Start Server: `redis-server`
 - Install [PgAdmin](https://www.pgadmin.org/) or [Postico](https://eggerapps.at/postico/)
 - Install [RVM](https://rvm.io/rvm/install)
   - Install RVM with `\curl -sSL https://get.rvm.io | bash`
   - From terminal run `source ~/.bash_profile`
-  - If you run into brew permission issues, please try the following command: `sudo chown -R `whoami`:admin/usr/local/bin"` Replace whoami with your current terminal user. My terminal screen reads as follows: Karols-Macbook-Air:zhub kchudy$. In this case kchudy would replace 'whoami'. If rvm install ruby still throws permission errors remove homebrew and reinstall the latest version by following the below steps:
+  - If you run into brew permission issues, please try the following command: `sudo chown -R `*whoami*`:admin/usr/local/bin"` Replace *whoami* with your current terminal user. My terminal screen reads as follows: Karols-Macbook-Air:zhub kchudy$. In this case kchudy would replace '*whoami*'. If rvm install ruby still throws permission errors remove homebrew and reinstall the latest version by following the below steps:
     - `brew update`
     - `rm -rf /usr/local/Cellar /usr/local/.git && brew cleanup`
     - `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
@@ -28,11 +31,7 @@
   - Clone the Repository
     - `git clone https://github.com/zuora/connect-starter-package.git`
 
-## Configuration
-
-- config/secrets.yml File
-  - Zuora Username
-  - Zuora Password
+## Configuration & Running the Starter Package
 - config/initalizers/connect.rb
   - Reference Connect Gem Documentation for available options
 - config/database.yml
@@ -42,42 +41,31 @@
 - Run `rake db:migrate`
 - Start the server with `rails s`
 
-## Delayed Job
+## Resque
 
 ### Worker
-The starter package includes a basic example of a worker that pulls from the Zuora product catalog and creates records in the database
+The starter package includes a basic example of a worker that creates records in the database from subscription queries
 ```ruby
-class Catalog
- attr_accessor :schema
- def initialize(instance_id)
-   @instance_id = instance_id
-   @schema = ActiveRecord::Base.connection.schema_search_path
- end
- def perform()
-   @appinstance = ZuoraConnect::AppInstance.find(@instance_id)
-   @appinstance.new_session()
-   products = Product.all
-   resp = @appinstance.target_login.client.rest_call(:url => @appinstance.target_login.client.rest_endpoint("catalog/products"))[0]
-   resp["products"].each do |product|
-    if products.where(:name => product["name"]).size == 0
-     Product.create!(:name => product["name"], :price => product["productRatePlans"].blank? ? "N/A" : product["productRatePlans"][0]["productRatePlanCharges"][0]["pricingSummary"][0], :category => product["category"].blank? ? "N/A" : product["category"], :zuora_id => product["id"])
-    else
-      app_product = products.where(:name => product["name"]).first
-      app_product.update_attributes(:name => product["name"], :price => product["productRatePlans"].blank? ? "N/A" : product["productRatePlans"][0]["productRatePlanCharges"][0]["pricingSummary"][0], :category => product["category"].blank? ? "N/A" : product["category"], :zuora_id => product["id"])
-    end
-   end
+class SubscriptionQueryWorker
+  attr_accessor :schema
+
+  def self.queue
+    @queue = :subscription_query_worker
+  end
+
+  def self.perform(appinstance_id)
+    appinstance = ZuoraConnect::AppInstance.find(appinstance_id)
+    appinstance.new_session()
+    subscription_query = SubscriptionQuery.new(appinstance)
+    subscription_query.execute
   end
 end
 ```
 ### Queue Jobs
 Jobs can be queued using the below code snippet
 ```ruby
-Delayed::Job.enqueue(Catalog.new(@appinstance.id))
+Resque.enqueue(SubscriptionQueryWorker, Thread.current[:appinstance].id)
 ```
-
-### Start Worker
-An additional background process must be running on the system to pick up jobs as they are queued. Start workers by running `bin/delayed_job -n 2 start` in another terminal. Notice that the 2 indicates that 2 workers should be running.
-Additional options can be found in the Connect Gem Documentation
 
 ## Datatables
 
@@ -321,7 +309,7 @@ Create a file in the view directory for the specified action in the controller i
 Authentication is done through the Connect gem which is automatically included in the starter package. The gem generates unique tokens for every app instance that is setup against the application. These tokens are used to make API calls to the application directly. In order to use this included authentication mechanism the base API controller uses the before filter `before_filter :authenticate_app_api_request`
 
 ### Controller
-An example controller(api/v1/products_controller.rb) is included in the starter package that can be modeled after when setting up your own apis. It is important to note that all API controllers should inherit from the **api_base_controller**. This will ensure that all common functionality is pulled down to every API controller you create. The base controller includes basic features such as the automatic includement of CORS filtering, Authentication, and error handling of many common errors. It is worth noting that if there is any logic that should take place before any API action ever executes it can be appended to the **api_base_controller**.
+An example controller is provided below that can be modeled after when setting up your own apis. It is important to note that all API controllers should inherit from the **api_base_controller**. This will ensure that all common functionality is pulled down to every API controller you create. The base controller includes basic features such as the automatic includement of CORS filtering, Authentication, and error handling of many common errors. It is worth noting that if there is any logic that should take place before any API action ever executes it can be appended to the **api_base_controller**.
 
 An example API Controller can be seen below
 ```ruby
