@@ -36,7 +36,7 @@ private
         DT_RowClass: nil,
         DT_RowAttr: { },
         #{column_data.join(",\n\t\t\t\t")},
-        #{class_name.pluralize.underscore.gsub("/", "_")}_actions: actions(#{class_name.singularize.underscore.gsub("/", "_")}),
+        #{class_name.pluralize.underscore.gsub("/", "_")}__actions: actions(#{class_name.singularize.underscore.gsub("/", "_")}),
       }
     end
   end
@@ -64,7 +64,7 @@ private
       if !field.blank? && !object.blank?
         map = {"#{class_name}" => #{class_name}}
         field_type = map[object.classify].column_for_attribute(field).type
-        return [:string, :text].include?(field_type) ? "lower(\#{col.gsub("/", "_")})" : col
+        return [:string, :text].include?(field_type) ? "lower(\#{col.gsub("/", "_")})" : "\#{col.gsub("/", "_")}"
       else
         return col
       end

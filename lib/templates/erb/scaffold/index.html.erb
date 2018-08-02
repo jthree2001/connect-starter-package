@@ -1,5 +1,3 @@
-<p id="notice"><%%= notice %></p>
-
 <%% content_for :breadcrumbs do %>
   <ul class="breadcrumb">
     <li><%%= link_to "Home", root_path %></li>
@@ -7,25 +5,19 @@
   </ul>
 <%% end %>
 
-<div class="row">
-  <div class="col-lg-12">
-    <div class="green-header">
-      <h2><%= plural_table_name.titleize %></h2>
-    </div>
-    <ul class="nav tab-header">
-      <li class="active"><a href="#index"><%= plural_table_name.titleize %></a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane active" id="index">
-        <%% table_actions = capture do %>
-          <div class="btn-group">
-            <%%= link_to  new_<%= singular_table_name %>_path, :remote => true, :class => 'btn btn-default' do %>
-              <span class="fa fa-plus"></span> New <%= singular_table_name.titleize %>
-            <%% end %>
-          </div>
-        <%% end %>
-        <%%= render_datatable(<%= controller_class_name.singularize %>, <%= singular_table_name %>s_path(format: "json"), :table_actions => table_actions) %>
-      </div>
-    </div>
+<div class="green-header">
+  <h1><%= plural_table_name.titleize %></h1>
+</div>
+<ul class="nav tab-header">
+  <li class="active"><a href="#index" data-toggle="tab"><%= plural_table_name.titleize %></a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="index">
+    <%% table_actions = capture do %>
+      <%%= link_to  new_<%= singular_table_name %>_path, remote: true, class: 'table-btn' do %>
+        <span class="z-icon-add"></span>
+      <%% end %>
+    <%% end %>
+    <%%= render_datatable(<%= controller_class_name.singularize %>, <%= singular_table_name %>s_path(format: "json"), :table_actions => table_actions) %>
   </div>
 </div>

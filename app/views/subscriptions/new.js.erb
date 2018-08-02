@@ -1,2 +1,1 @@
-$("#subscriptions_form_modal").html("<%= escape_javascript(render 'new') %>");
-$("#subscriptions_form_modal").modal("show");
+<%  render(:file=>"subscriptions/new", locals: {}, :formats => [:html] ) %>

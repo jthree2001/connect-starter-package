@@ -3,16 +3,15 @@
 <%% end %>
 
 <%% content_for :modal do %>
-  <div class="modal-dialog" style="width: 800px">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">Title</h4>
+        <h2 class="modal-title"><%= singular_table_name.titleize %></h2>
       </div>
       <div class="overlay">
-        <i id="loading_form_icon" class="glyphicon glyphicon-refresh glyphicon-spin"></i>
+        <span id="loading_form_icon" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
       </div>
-      <div class="modal-body z-background">
+      <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
             <p id="notice"><%%= notice %></p>
@@ -23,13 +22,12 @@
               <strong><%= attribute.human_name %>:</strong>
               <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
             </p>
-
             <% end -%>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="zuo-btn secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

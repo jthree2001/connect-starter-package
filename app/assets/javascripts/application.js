@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery-migrate-min
 //= require jquery_ujs
-//= require jquery-ui
 //= require jquery.ba-resize
 //= require js-cookie
 //= require jquery.noty
@@ -24,28 +23,15 @@
 //************ cronGen ************
 //= require js/cronGen.js
 //
-//************ Bootstrap ************
-//= require bootstrap-sprockets
-//= require bootstrap-hover-dropdown
-//
-//************ Datatables ************
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-//= require dataTables/extras/dataTables.responsive
-//= require dataTables/extras/dataTables.responsive
-//= require dataTables/extras/dataTables.colReorder
-//= require dataTables/extras/dataTables.select
-//
-//************ Select2 ************
-//= require select2-full
-//= require select2_locale_en
-//= require select2_locale_fr
-//= require select2_locale_zh-CN
-//
 //************ UnderScore ************
 //= require underscore
 //
 //***********ContextMenu********
 //= require js/jquery.contextMenu.min.js
+//
+//= require peek
+//= require peek/views/performance_bar
+//
+//= require zuora_connect_ui
 //
 //= require_tree .

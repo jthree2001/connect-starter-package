@@ -1,2 +1,9 @@
-<%= link_to '', edit_subscription_path(subscription), {:remote => true, :class => 'fa fa-pencil btn btn-success btn-margin-sm','data-toggle' =>  "modal", 'data-target' => '#modal-window'}%> 
-<%= link_to '', subscription, :remote => true, method: :delete, :class => 'fa fa-trash btn btn-danger btn-margin-sm', data: { confirm: 'Are you sure?' } %>
+<%= render 'partials/row_actions' do %>
+  <li>
+    <%= link_to 'Edit', edit_subscription_path(subscription), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#modal-window'}%>
+  </li>
+  <li class="divider"></li>
+  <li>
+    <%= link_to 'Delete', subscription, :remote => true, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </li>
+<% end %>
