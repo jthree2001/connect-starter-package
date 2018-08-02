@@ -1,8 +1,8 @@
-class Api::V1::ProductsController < Api::V1::APIBaseController
-  before_action :set_product, only:  [:show]
+class Api::V1::SubscriptionsController < Api::V1::APIBaseController
+  before_action :set_subscription, only:  [:show]
   def index
-    @products = Product.all
-    @unfiltered_size = @products.size
+    @subscriptions = Subscription.all
+    @unfiltered_size = @subscriptions.size
     if params[:page].nil?
       @page = 1
     else
@@ -13,7 +13,7 @@ class Api::V1::ProductsController < Api::V1::APIBaseController
     else
       @page_length = params[:page_length].to_i
     end
-    @products = @products.page(@page).per_page(@page_length)
+    @subscriptions = @subscriptions.page(@page).per_page(@page_length)
     respond_to do |format|
       format.json {render :status => :ok}
     end
@@ -26,7 +26,7 @@ class Api::V1::ProductsController < Api::V1::APIBaseController
   end
 
   private
-    def set_product
-      @product = Product.find(params[:id])
+    def set_subscription
+      @subscription = Subscription.find(params[:id])
     end
 end
