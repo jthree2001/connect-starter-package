@@ -1,4 +1,4 @@
-<%= render 'partials/row_actions' do %>
+<%%= render 'partials/row_actions' do %>
   <li>
     <%%= link_to 'Show', <%= singular_table_name %>, remote: true %>
   </li>
@@ -9,4 +9,4 @@
   <li>
     <%%= link_to 'Delete', <%= singular_table_name %>, remote: true, method: :delete, data: { confirm: 'Are you sure?' } %>
   </li>
-<% end %>
+<%% end %>
