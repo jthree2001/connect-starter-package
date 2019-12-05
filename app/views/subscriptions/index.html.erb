@@ -14,12 +14,9 @@
 </ul>
 <div class="tab-content">
   <div class="tab-pane active" id="index">
-    <% table_actions = capture do %>
-      <%= link_to  new_subscription_path, :remote => true, :class => 'table-btn' do %>
-        <span class="z-icon-add"></span>
-      <% end %>
-    <% end %>
-    <%= render_datatable(Subscription, subscriptions_path(format: "json"), :table_actions => table_actions) %>
+    Hello World
   </div>
-  <div class="tab-pane" id="test_tab"></div>
+  <div class="tab-pane" id="test_tab">
+    Hello world in a different tab
+  </div>
 </div>
