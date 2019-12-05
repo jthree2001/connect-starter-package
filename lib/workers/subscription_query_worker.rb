@@ -6,9 +6,6 @@ class SubscriptionQueryWorker
 	end
 
 	def self.perform(appinstance_id)
-		appinstance = ZuoraConnect::AppInstance.find(appinstance_id)
-		appinstance.new_session()
-		subscription_query = SubscriptionQuery.new(appinstance)
-		subscription_query.execute
+		ignore me
 	end
 end

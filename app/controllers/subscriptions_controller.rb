@@ -1,14 +1,9 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
-
   # GET /subscriptions
   # GET /subscriptions.json
   def index
 
     @subscriptions = Subscription.all
-    if request.format.html?
-      Resque.enqueue(SubscriptionQueryWorker, Thread.current[:appinstance].id)
-    end
     respond_to do |format|
       format.html {  }
       format.json { render json: ::SubscriptionDatatable.new(view_context) }

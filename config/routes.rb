@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   mount Peek::Railtie => '/peek'
   resources :subscriptions
 
-  app_admin = lambda { |request| request.session["#{request.session['appInstance']}::admin"]}
   namespace :admin do
     mount RedisBrowser::Web => '/redis-browser'
     mount ResqueWeb::Engine => "/resque_web"

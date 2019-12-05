@@ -9,12 +9,8 @@ gem 'pg', '~> 0.21.0'
 gem 'nokogiri'
 gem 'httparty'
 gem 'will_paginate'
-gem 'zuora_api'
-gem 'zuora_connect'
-gem 'zuora_connect_ui'
 
 # gem 'zuora_api_oauth_alpha', '2'
-# gem 'zuora_connect_oauth_alpha', '2'
 
 #Front End Gems
 gem 'simple_form'

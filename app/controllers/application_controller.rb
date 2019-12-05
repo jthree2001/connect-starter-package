@@ -5,9 +5,6 @@ class ApplicationController < ActionController::Base
   #protect_from_forgery with: :exception
   protect_from_forgery with: :null_session
 
-  before_filter :authenticate_connect_app_request
-  after_filter :persist_connect_app_session
-
 
 
   protected
@@ -28,34 +25,6 @@ class ApplicationController < ActionController::Base
       format.html { render 'errors', status: 503 }
       format.js { render 'errors', status: 503 }
       format.all { render json: exception.message}
-    end
-  end
-
-  rescue_from ZuoraConnect::Exceptions::AccessDenied do |exception|
-    flash[:error] = "Access Denied: #{exception.message}"
-    respond_to do |format|
-      format.html { render 'errors', status: 401 }
-      format.js { render 'errors', status: 401 }
-      format.all { render json: exception.message, status: 401 }
-    end
-  end
-
-  rescue_from ZuoraConnect::Exceptions::ConnectCommunicationError do |exception|
-    flash[:error] = "App Communication Error: #{exception.message}"
-    @detailed_response =  "#{exception.code} - #{exception.response}"
-    respond_to do |format|
-      format.html { render 'errors', status: 400 }
-      format.js { render 'errors', status: 400 }
-      format.all { render json: exception.message, status: 400 }
-    end
-  end
-
-  rescue_from ZuoraConnect::Exceptions::SessionInvalid do |exception|
-    flash[:error] = "Session Error: #{exception.message}"
-    respond_to do |format|
-      format.html { render 'errors', status: 400}
-      format.js { render 'errors', status: 400 }
-      format.all { render json: exception.message, status: 400 }
     end
   end
 
