@@ -9,7 +9,11 @@ gem 'pg', '~> 0.21.0'
 gem 'nokogiri'
 gem 'httparty'
 gem 'will_paginate'
-
+gem 'jquery-ui-rails'
+gem "select2-rails"
+gem 'jquery-datatables-rails', :git =>'https://github.com/rweng/jquery-datatables-rails.git'
+gem 'bootstrap-sass', '~> 3.4.1'
+gem 'sassc-rails', '>= 2.1.0'
 # gem 'zuora_api_oauth_alpha', '2'
 
 #Front End Gems

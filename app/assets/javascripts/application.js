@@ -32,6 +32,7 @@
 //= require peek
 //= require peek/views/performance_bar
 //
-//= require zuora_connect_ui
-//
 //= require_tree .
+//
+//= require jquery-ui/
+//
